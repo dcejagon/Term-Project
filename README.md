@@ -28,3 +28,8 @@ Drawing of Proposed Plotter
 |  1   | Vbearings and Belt    | Amazon                |   $18.59  |
 |  1   | 2020 Al Extrusion     | Amazon                |   $19.99  |
 
+
+### Preliminary CAD Model
+![CAD of main carriage](https://github.com/dcejagon/Term-Project/blob/1b538ee28f59977871e3b20c34f9b20de40c2d71/maincar.png)
+CAD model of main carriage including 1/2 axis servo motor
+
