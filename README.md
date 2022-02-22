@@ -21,7 +21,9 @@ Drawing of Proposed Plotter
 |:----:|:----------------------|:----------------------|:---------:|
 |  2   | Pittperson Gearmotors | ME405 Tub             |     -     |
 |  1   | Nucleo with Shoe      | ME405 Tub             |     -     |
+|  1   | Motor H-Bridge        | ME405 Tub             |     -     |
 |  1   | Purple Sharpie&trade; | Office Min&trade;     |     -     |
+|  1   | Servo Motor           | Personal Supply       |     -     |
 |  1   | Limit Switch pack     | Amazon                |   $6.99   |
 |  1   | Vbearings and Belt    | Amazon                |   $18.59  |
 |  1   | 2020 Al Extrusion     | Amazon                |   $19.99  |
