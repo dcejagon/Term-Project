@@ -11,7 +11,7 @@ shipping costs. Team members have access to 3D printers, which will be used
 to fabricate custom parts such as mounting plates at no additional cost.
 ### Sketch of Proposed Plotter 
 
-![Drawing of Proposed Plotter](https://github.com/dcejagon/Term-Project/blob/c546580a2c691aeb2a39f24910af9dcf8e33d4a9/Project_Sketch.png)
+![Drawing of Proposed Plotter](https://github.com/dcejagon/Term-Project/blob/d55f55b985cb45acc1c4e1f98c530143e906ff7f/Project%20Sketch%20.png)
 Drawing of Proposed Plotter
 
 ### Preliminary BOM and Estimated Cost
