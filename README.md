@@ -2,9 +2,7 @@
 ### Description 
 For our project, we are proposing a 2.5 axis plotter that will be similar to 
 the first example listed in the term project details. This will use a rotating
-arm, with the actual pen extending out on the arm. This fulfils the requirement 
-for the plotter to be non-rectilinear. In addition, This plotter should be
-relatively low cost ~$15 per person. We intend to use materials commonly used
+arm, with the actual pen extending out on the arm. The base of the plotter will hold 2 motors; the first motor will control the rotation of the arm similar to the motion of  a windshield wiper while the second motor will change the radial position of the pen carrier. The radial motor will control the pen location by moving the fixture using driven belts. The pen carrier will have a servo motor that controls the up and down motion of the pen. This fulfils the requirement for the plotter to be non-rectilinear. In addition, This plotter should be relatively low cost ~$15 per person. We intend to use materials commonly used
 in 3D printing like Aluminum T-Slot extrusion and V-Slot bearings. 
 The initial bill of materials and estimated cost breakdown is seen below. 
 Items that have a "-" in the cost column are parts that we have access to 
@@ -13,7 +11,7 @@ shipping costs. Team members have access to 3D printers, which will be used
 to fabricate custom parts such as mounting plates at no additional cost.
 ### Sketch of Proposed Plotter 
 
-![Drawing of Proposed Plotter](https://github.com/dcejagon/Term-Project/blob/c546580a2c691aeb2a39f24910af9dcf8e33d4a9/Project_Sketch.png)
+![Drawing of Proposed Plotter](https://github.com/dcejagon/Term-Project/blob/d55f55b985cb45acc1c4e1f98c530143e906ff7f/Project%20Sketch%20.png)
 Drawing of Proposed Plotter
 
 ### Preliminary BOM and Estimated Cost
