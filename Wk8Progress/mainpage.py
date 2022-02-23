@@ -20,11 +20,10 @@ In addition, we plan to have the differnet tasks communicate with eachother usin
 the structure outlined in previous labs and by using CoTasks.py to make sure we 
 are taking advantage of cooperative multitasking.  
             
-
-\image html TaskDiagramTermProject.png 
-
-"Task Diagram and Important Shares"            
-
+\htmlonly
+\image html TaskDiagramTermProject.png "Task Diagram and Important Shares"
+\endhtmlonly
+            
 @section sec_lb2    FSM for each task
     
     
@@ -33,10 +32,10 @@ Many of these have just two states, "On" and "Off" but the transitions unique to
 is shown below. 
 
 
+\htmlonly
+\image html FSMTermProject.png "FSMs for tasks"
+\endhtmlonly
 
-\image html FSMTermProject.png 
-
-"FSMs for tasks"
 
 
 @author              Nolan Clapp
