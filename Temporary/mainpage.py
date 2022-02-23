@@ -5,10 +5,10 @@
 
 @mainpage
 
-@section sec_intro   Introduction
-                        This is our project postings for Peyton Archibald and Caleb Kephart
+@section sec_intro   ME 405 Term Project
+                        This is our project main page for the ME 405 plotter project
                         
-                        Our Source Code Repository can be found:  \htmlonly <a href="https://bitbucket.org/peytia/me305/src/master/">here</a> \endhtmlonly
+                        Our Source Code Repository can be found:  \htmlonly <a href="https://github.com/dcejagon/Term-Project/tree/main/Temporary">here</a> \endhtmlonly
 
 @section sec_lb1     Task Diagram and File Structure 
    
