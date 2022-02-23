@@ -5,10 +5,11 @@
 
 @mainpage
 
-@section sec_intro   ME 405 Term Project
-                        This is our project main page for the ME 405 plotter project
+@section sec_intro   ME 405 Term Project Wk8 Progress Check
+                        This is our project main page for the ME 405 plotter project, and the progress
+                        we have made up to this point on the software side of the project. 
                         
-                        Our Source Code Repository can be found:  \htmlonly <a href="https://github.com/dcejagon/Term-Project/tree/main/Temporary">here</a> \endhtmlonly
+                        Our Source Code Repository can be found:  \htmlonly <a href="https://github.com/dcejagon/Term-Project/tree/main/Temporary">HERE</a> \endhtmlonly
 
 @section sec_lb1     Task Diagram and File Structure 
    
@@ -20,10 +21,9 @@ In addition, we plan to have the differnet tasks communicate with eachother usin
 the structure outlined in previous labs and by using CoTasks.py to make sure we 
 are taking advantage of cooperative multitasking.  
             
-\htmlonly
-\image html TaskDiagramTermProject.png "Task Diagram and Important Shares"
-\endhtmlonly
-            
+
+\image html TaskDiagramTermProject.PNG "Task Diagram and Important Shares"  width=900px      
+
 @section sec_lb2    FSM for each task
     
     
@@ -32,17 +32,12 @@ Many of these have just two states, "On" and "Off" but the transitions unique to
 is shown below. 
 
 
-\htmlonly
-\image html FSMTermProject.png "FSMs for tasks"
-\endhtmlonly
 
+\image html FSMTermProject.png "FSMs for tasks" width=900px     
 
 
 @author              Nolan Clapp
 @author              Caleb Kephart
 @author              Daniel Gonzalez
-
-@copyright           Open Source
-
 @date                Feb 22, 2022
 '''

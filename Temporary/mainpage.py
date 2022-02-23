@@ -21,7 +21,7 @@ the structure outlined in previous labs and by using CoTasks.py to make sure we
 are taking advantage of cooperative multitasking.  
             
 
-\image html TaskDiagramTermProject.png 
+\image html TaskDiagramTermProject.PNG 
 
 "Task Diagram and Important Shares"            
 
@@ -34,7 +34,7 @@ is shown below.
 
 
 
-\image html FSMTermProject.png 
+\image html FSMTermProject.PNG 
 
 "FSMs for tasks"
 
