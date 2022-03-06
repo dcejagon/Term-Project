@@ -72,6 +72,7 @@ class RClosedLoop:
         ## @brief starting time of data collection 
         #
         self.starttime=time.ticks_ms()
+        
     def Setpoint(self,setpoint1,setpoint2):
         '''!
             Accesses the setpoint shares to set final encoder position for each motor.
@@ -94,21 +95,22 @@ class RClosedLoop:
         #This calculates the correct setpoint based on shared x and y position values from GCode
         #R=math.sqrt(self.xpos.get()^2+self.ypos.get()^2)
         # Factor to convert from rotations (ticks) to linear position
-        #180deg=0.85 in-----> 1 motor rotation= 1.7 inches in R direction
+        # 1 motor rotation= 1.51 inches in R direction
         #360 degrees = 4096*4 ticks (multiply desired degrees by 4096*4/360)
-        #degtolin=4096*4/1.7
+        #degtolin=4096*4/1.51
         #self.setpoint2.put(R*degtolin)
         ## @brief the error between actual and desired position
         #
+        #print('Running Control Loop for R')
         self.error2=self.setpoint2.get()-self.EncPosition2.get()*360/(4096*4)
         ## @brief the duty cycle required for the system to correct with set gain.
-        # 
         #print(self.error2)
-        #print(self.EncPosition2.get()*360/(4096*4))
+        
+        print('R Encoder Position:',self.EncPosition2.get()*360/(4096*4))
         self.actuation2=self.Kp2.get()*self.error2
         #print(self.actuation2)
         self.duty2.put(self.actuation2)
-        print(self.duty2.get())
+        #print(self.duty2.get(),'=R Duty')
         
         # utime.sleep_ms(10)
         #print(time.ticks_ms(),self.EncPosition.get())

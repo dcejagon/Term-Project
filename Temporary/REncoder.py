@@ -14,7 +14,7 @@ class EncoderDriver:
         @details This code allows us to calculate the current position in ticks of the motor shaft
     '''
         
-    def __init__(self,ENCpin1,ENCpin2,timernumber):
+    def __init__(self,ENCpin1,ENCpin2,timernumber,EncPosition2):
         ''' @brief Constructs an encoder object
             @details Sets up the encoder so it is ready to run using the pins specified in some main file
             @param ENCpin1 This parameter allows us to choose which first pin our encoder will be using 
@@ -56,6 +56,7 @@ class EncoderDriver:
         #                    as channel 2
         self.ENCch2= self.tim4.channel(2, pyb.Timer.ENC_AB, pin=self.ENCpin2)
         
+        self.EncPosition2=EncPosition2
         print ('Creating a encoder driver')
         
     def read(self):
@@ -69,7 +70,7 @@ class EncoderDriver:
         #  @details         This variable uses the onboard coutner to determine
         #                   encoder position
         count=self.tim4.counter()     
-        print(count)
+        #print(count)
         ## @brief           Creates a variable that keeps track of the encoder delta
         #  @details         This variable is used to prevent counter overflow on our encoder
         delta=count-self.countprev
@@ -85,6 +86,8 @@ class EncoderDriver:
         #else:
            # self.ENCposition=count
         self.ENCposition+=delta
+        
+        self.EncPosition2.put(self.ENCposition)
         self.countprev=count
         #print(self.ENCposition*360/(4096*4))
         

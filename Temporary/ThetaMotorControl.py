@@ -104,15 +104,17 @@ class ThetaClosedLoop:
         # @brief the error between actual and desired position
         # @detils Uses the encoder position in degrees and setpoint in degrees
         self.error1 = self.setpoint1.get()-self.EncPosition1.get()*360/(4096*4)
-
-        #print(self.EncPosition1.get()*360/(4096*4))
+        #print(self.error1)
+        print('Theta Encoder:',self.EncPosition1.get()*360/(4096*4))
         # @brief the duty cycle required for the system to correct with set gain.
         #
         #print(self.error1)
         self.actuation1 = self.Kp1.get()*self.error1
         #print(self.actuation1)
         
-        self.duty1.put(self.actuation1*10)
+        self.duty1.put(self.actuation1)
+        #CONTROLS MOTOR A
+        #print(self.duty1.get(), '=Theta Duty')
         #print(self.duty1.get())
         # utime.sleep_ms(10)
         # print(time.ticks_ms(),self.EncPosition.get())

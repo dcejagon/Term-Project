@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar  5 10:51:40 2022
+
+@author: nclap
+"""
+
 ''' @file                       MotorDriver.py
     @brief                      A driver file for interacting with motors
     @details                    This driver file interacts with motors sending duty cycle values and setting pin values to 
@@ -14,7 +21,7 @@ class MotorDriver:
         @details                Class composed of two functions to manipulate a motor.
     '''
 
-    def __init__ (self,en_pin,en_pin2,in1pin,in2pin,in1pin2,in2pin2,timer,timer2,duty1,duty2):
+    def __init__ (self,en_pin,in1pin,in2pin,timer,duty):
         '''!
         Creates a motor driver by initializing GPIO
         pins and turning the motor off for safety. 
@@ -24,26 +31,17 @@ class MotorDriver:
         ## @brief Initializes en pin
         #
         self.en_pin=en_pin
-        self.en_pin2=en_pin2
         ## @brief Initializes In1 Pin
         #
         self.in1pin=in1pin
         ## @brief Initializes In2 Pin
         #
         self.in2pin=in2pin
-        
-        self.in1pin2=in1pin2
-        ## @brief Initializes In2 Pin
-        #
-        self.in2pin2=in2pin2
-        
         ## @brief Initializes timer
         #
         self.timer=timer
-        self.timer2=timer2
         ## @brief Initializes motor timer
         #
-
         self.tim3 = pyb.Timer (self.timer, freq=20000)
         ## @brief Sets motor channel and pins to recieve PWM
         #
@@ -52,18 +50,9 @@ class MotorDriver:
         #
         self.ch2 = self.tim3.channel (2, pyb.Timer.PWM, pin=in2pin)
         
+        self.duty1=duty
         
-        self.tim5 = pyb.Timer (self.timer2, freq=20000)
-        ## @brief Sets motor channel and pins to recieve PWM
-        #
-        self.ch12 = self.tim5.channel (1, pyb.Timer.PWM, pin=in1pin2)
-        ## @brief Sets motor channel and pins to recieve PWM
-        #
-        self.ch22 = self.tim5.channel (2, pyb.Timer.PWM, pin=in2pin2)
         
-        self.duty1=duty1
-        
-        self.duty2=duty2
         print ('Creating a motor driver')
 
     def set_duty_cycle (self,duty1):
@@ -86,11 +75,9 @@ class MotorDriver:
         level=self.duty1.get()
         #print(self.duty1.get())
         if level>=0:
-            
-            
-            self.ch1.pulse_width_percent(level)
+            #print('working')
+            self.ch1.pulse_width_percent(100)
             self.ch2.pulse_width_percent(0)
-            #print('Theta Motor Working')
         else:
             self.ch1.pulse_width_percent(0)
             self.ch2.pulse_width_percent(abs(level))
@@ -105,18 +92,6 @@ class MotorDriver:
         # else:
         #     self.ch1.pulse_width_percent(0)
         #     self.ch2.pulse_width_percent(abs(self.duty1.get()))
-            
-    def set_duty_cycle2(self,duty2): 
-        #R MOTOR STUFF
-        self.en_pin2.high()
-        self.in1pin2.low()
-        self.in2pin2.low()
-        if self.duty2.get()>=0: 
-            self.ch12.pulse_width_percent(self.duty2.get())
-            self.ch22.pulse_width_percent(0)
-        else:
-            self.ch12.pulse_width_percent(0)
-            self.ch22.pulse_width_percent(abs(self.duty2.get()))
         
         
 

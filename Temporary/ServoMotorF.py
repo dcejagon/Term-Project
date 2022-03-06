@@ -19,10 +19,12 @@ class ServoMotorF:
     def up(self):
         # PWM % of 1 is pointing down towards the sharpie tip, and increase to move the pen upwards
         self.ch3.pulse_width_percent(16)
-        print('Pen Raised')
+        #print('Pen Raised')
+        return 1
     def down(self):
         self.ch3.pulse_width_percent(10)
-        print('Pen Lowered')
+        #print('Pen Lowered')
+        return 2
     
 if __name__ == "__main__":
     pinD6 = pyb.Pin (pyb.Pin.board.D6, pyb.Pin.OUT_PP)
@@ -31,8 +33,8 @@ if __name__ == "__main__":
     Servo1=ServoMotorF(pinD6,tim2,ch3)
     
     #LIMIT SWITCH STUFF#
-    pinD5=pyb.Pin(pyb.Pin.board.D5, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
-    pinD5.value()
+    pinD9=pyb.Pin(pyb.Pin.board.D15, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
+    pinD9.value()
     #Checks for high and low, high(1) is unpressed and low(0) is pressed
     
     while (True):

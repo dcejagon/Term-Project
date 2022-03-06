@@ -12,7 +12,9 @@ import cotask
 import task_share
 import EncoderDriver
 import Encoder
+import REncoder
 import MotorDriver
+import SingleMotorDriver
 import ClosedLoop
 import ThetaMotorControl
 import RMotorControl
@@ -61,21 +63,22 @@ zpos = task_share.Share ('h', thread_protect = False, name = "z_Position")
 Rswitch = task_share.Share ('h', thread_protect = False, name = "R_Switch")
 Tswitch = task_share.Share ('h', thread_protect = False, name = "T_Switch")
 
-setpoint1.put(90)   #Theta Setpoint (Degrees)
-setpoint2.put(0)    #R setpoint (degrees)
+setpoint1.put(-90)   #Theta Setpoint (Degrees)
+setpoint2.put(-270)    #R setpoint (degrees)
 xpos.put(4)
 ypos.put(4)
 
-Kp1.put(.1)
-Kp2.put(10)
+Kp1.put(1)
+Kp2.put(1)      #Motor A
 
 ##OBJECTS
-motor1=MotorDriver.MotorDriver(en_pin, in1pin, in2pin, timer,duty1,duty2)
-motor2=MotorDriver.MotorDriver(en_pin2, in1pin2, in2pin2, timer2,duty1,duty2)
+motor1=MotorDriver.MotorDriver(en_pin, en_pin2, in1pin, in2pin, in1pin2, in2pin2, timer, timer2,duty1,duty2)
+#motor1=SingleMotorDriver.MotorDriver(en_pin,in1pin,in2pin,timer,duty1)
+motor2=MotorDriver.MotorDriver(en_pin, en_pin2, in1pin, in2pin, in1pin2, in2pin2, timer, timer2,duty1,duty2)
 
 ENC1=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition,EncPosition2)
-ENC2=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition,EncPosition2)
-
+#ENC2=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition,EncPosition2)
+ENC2=REncoder.EncoderDriver(ENC2pin1,ENC2pin2,timernumber2,EncPosition2)
 ThEnc=Encoder.Encoder(ENCpin1,ENCpin2,timernumber)
 #ThEnc2=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition1,EncPosition2)
 
@@ -85,59 +88,74 @@ ThEnc=Encoder.Encoder(ENCpin1,ENCpin2,timernumber)
 ThetaControl=ThetaMotorControl.ThetaClosedLoop(Kp1,setpoint1,EncPosition,duty1,xpos,ypos)
 RControl=RMotorControl.RClosedLoop(Kp2,setpoint2,EncPosition2,duty2,xpos,ypos)
 
-servopin = pyb.Pin (pyb.Pin.board.D6, pyb.Pin.OUT_PP)
-servotimer =2
-servoch = 3
+# servopin = pyb.Pin (pyb.Pin.board.D6, pyb.Pin.OUT_PP)
+# servotimer =2
+# servoch = 3
 
-switchpin1=pyb.Pin(pyb.Pin.board.D5, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
-switchpin2=pyb.Pin(pyb.Pin.board.D6, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
+# switchpin1=pyb.Pin(pyb.Pin.board.D7, pyb.Pin.IN, pyb.Pin.PULL_DOWN) #PB4
+# switchpin2=pyb.Pin(pyb.Pin.board.D9, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
 
-Servo=ServoMotorF.ServoMotorF(servopin, servotimer, servoch)
-LimitSwitch=LimitSwitch.LimitSwitch(switchpin1,switchpin2)
+# Servo=ServoMotorF.ServoMotorF(servopin, servotimer, servoch)
+#LSwitch=LimitSwitch.LimitSwitch(switchpin1,switchpin2)
+
 zpos.put(0)
 def task1_fun ():
     '''!
         runs tasks and functions for the first motor
     '''
     while True:
+        #Theta Direction
     # #do motor 1 stuff here       
-    #     ENC1.read()
-    #     ThetaControl.control_loop1()
-    #     #not running thetamotorcontrol
-    #     motor1.set_duty_cycle(duty1.get())
+        ENC1.read()
+        ThetaControl.control_loop1()
+        #not running thetamotorcontrol
+        motor1.set_duty_cycle(duty1.get())
         
         yield (0)
+        
 def task2_fun ():
     while True:
-        # ENC2.read2()
-        # RControl.control_loop()
-        # motor2.set_duty_cycle2(duty2.get())
+        #R Direction
+        ENC2.read()
+        RControl.control_loop()
+        motor2.set_duty_cycle2(duty2.get())
+        
         yield(0)
 
 def task3_fun():
-    while True:
-        if zpos.get()==0:
-            Servo.up()
-        elif zpos.get()==1:
-            Servo.down()
-        else: 
-            pass
+    while True:        
+        # LSwitch.checkswitch()
         
-        yield(0)
-        
-def task4_fun ():
-    while True:
-        LimitSwitch.checkswitch()
         yield (0)
-# def task3_fun ():
-    
-#     while True:
-#         #do motor 1 stuff here
         
-#         Cl1.printdata()
-
+# def task4_fun():
+#     while True:
+#         print ('servo') 
 #         yield (0)
-    
+
+
+
+# def task4_fun():
+#     while True:
+#         print('servo')
+#         # if zpos.get()==0:
+#         #     Servo.up()
+            
+#         # elif zpos.get()==1:
+#         #     Servo.down()
+            
+#         # else: 
+#         #     pass
+        
+#         yield(0)
+        
+# def task4_fun ():
+#     while True:
+#         print('SWitchTask')
+#         switchpin1.value()
+#         LSwitch.checkswitch()
+#         yield (0)
+
 if __name__=="__main__":
     while True:
         try:
@@ -150,15 +168,15 @@ if __name__=="__main__":
                         task2 = cotask.Task (task2_fun, name = 'Task_2', priority = 1, 
                                              period = 10, profile = True, trace = False)
                         task3 = cotask.Task (task3_fun, name = 'Task_3', priority = 1, 
-                                            period = 10, profile = True, trace = False)
+                                            period = 40, profile = True, trace = False)
                         task3 = cotask.Task (task3_fun, name = 'Task_3', priority = 1, 
-                                            period = 10, profile = True, trace = False)
-                        task4 = cotask.Task (task3_fun, name = 'Task_4', priority = 1, 
-                                            period = 10, profile = True, trace = False)
+                                            period = 30, profile = True, trace = False)
+                        # task4 = cotask.Task (task3_fun, name = 'Task_4', priority = 2, 
+                        #                     period = 20, profile = True, trace = False)
                         cotask.task_list.append (task1)
                         cotask.task_list.append (task2)
                         cotask.task_list.append (task3)
-                        cotask.task_list.append (task4)
+                        # cotask.task_list.append (task4)
                     
                         # Run the memory garbage collector to ensure memory is as defragmented as
                         # possible before the real-time scheduler is started

@@ -96,7 +96,7 @@ class EncoderDriver:
         #  @details         This variable uses the onboard coutner to determine
         #                   encoder position
         count=self.tim4.counter()
-        
+        #print(count)
         ## @brief           Creates a variable that keeps track of the encoder delta
         #  @details         This variable is used to prevent counter overflow on our encoder
         delta=count-self.countprev1
@@ -114,11 +114,11 @@ class EncoderDriver:
         
         self.position1+=delta
         self.EncPosition1.put(self.position1)
-        
+        #print(self.position1)
         self.countprev1=count
         
         #print(self.EncPosition1.get())
-        return self.EncPosition1.get()
+        
         
     def read2(self):
         ''' @brief Reads encoder position by calculating delta
@@ -126,12 +126,11 @@ class EncoderDriver:
             and delta values, at a constant interval defined in the main program file.
             @return position The new position of the encoder shaft
         '''
-        
         ## @brief           Creates a variable that keeps track of the count
         #  @details         This variable uses the onboard coutner to determine
         #                   encoder position
         count=self.tim8.counter()
-        
+        #print(count)
         ## @brief           Creates a variable that keeps track of the encoder delta
         #  @details         This variable is used to prevent counter overflow on our encoder
         delta=count-self.countprev2
@@ -149,11 +148,37 @@ class EncoderDriver:
         
         self.position2+=delta
         self.EncPosition2.put(self.position2)
-        
+        #print(self.position1)
         self.countprev2=count
+        ## @brief           Creates a variable that keeps track of the count
+        #  @details         This variable uses the onboard coutner to determine
+        #                   encoder position
+        # count2=self.tim8.counter()
+        # print(count2)
+        # ## @brief           Creates a variable that keeps track of the encoder delta
+        # #  @details         This variable is used to prevent counter overflow on our encoder
+        # delta2=count2-self.countprev2
+        # #print(delta2)
+ 
+        # #check delta and fix
+        # if delta2>= self.period/2:
+        #     delta2-=self.period
+        #     #print(delta)
+        # elif delta2< (-self.period/2):
+        # #add delta to position variable to 
+            
+        #     delta2+=self.period
+        # #make previous count = current count
+        
+        # self.position2+=delta2
+        
+        # self.EncPosition2.put(self.position2)
+        # #print(self.position2*360/(4096*4))
+        # #print(self.position2)
+        # self.countprev2=count2
         
         
-        return self.EncPosition2.get()
+        
     
     def zero (self):
         ''' @brief Sets encoder position to zero
@@ -172,9 +197,9 @@ if __name__=="__main__":
     import time
 
     
-    ENCpin1=pyb.Pin (pyb.Pin.board.PB6)
-    ENCpin2=pyb.Pin (pyb.Pin.board.PB7)
-    timernumber=4
+    ENCpin1=pyb.Pin (pyb.Pin.board.PC6)
+    ENCpin2=pyb.Pin (pyb.Pin.board.PC7)
+    timernumber=8
     ENC1=EncoderDriver(ENCpin1,ENCpin2,timernumber)
     while True:
         try:

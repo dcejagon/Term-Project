@@ -70,11 +70,17 @@ class MotorDriver:
 
 if __name__=="__main__":
     import pyb
-    en_pin=pyb.Pin (pyb.Pin.board.PC1, pyb.Pin.OUT_PP)
-    in1pin=pyb.Pin (pyb.Pin.board.PA0, pyb.Pin.OUT_PP)
-    in2pin=pyb.Pin (pyb.Pin.board.PA1, pyb.Pin.OUT_PP)
-    timer=5
+    en_pin2=pyb.Pin (pyb.Pin.board.PC1, pyb.Pin.OUT_PP)
+    in1pin2=pyb.Pin (pyb.Pin.board.PA0, pyb.Pin.OUT_PP)
+    in2pin2=pyb.Pin (pyb.Pin.board.PA1, pyb.Pin.OUT_PP)
+    timer2=5
+    en_pin=pyb.Pin (pyb.Pin.board.PA10, pyb.Pin.OUT_PP)
+    in1pin=pyb.Pin (pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
+    in2pin=pyb.Pin (pyb.Pin.board.PB5, pyb.Pin.OUT_PP)
+    timer=3
     motor1=MotorDriver(en_pin, in1pin, in2pin, timer)
+    motor2=MotorDriver(en_pin2, in1pin2, in2pin2, timer2)
     motor1.set_duty_cycle(50)
+    motor2.set_duty_cycle(50)
     
      
