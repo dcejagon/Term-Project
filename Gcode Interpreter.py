@@ -76,7 +76,7 @@ class GcodeInterpreter:
     def RGen (self):
         for i in range(0, len(self.x)):
             R_len=math.sqrt(self.x[i]**2+self.y[i]**2)
-            lintotick=4096*4/1.51
+            lintotick=360/1.51
             self.R.append(R_len*lintotick)
             
         return self.R
