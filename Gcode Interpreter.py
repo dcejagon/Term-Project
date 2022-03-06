@@ -10,9 +10,9 @@ import math
 class GcodeInterpreter:
     
     def __init__(self,setpoint1,setpoint2):
-        ''' initializes. x and y represent the columns that are used for 
-            the respective data. enter either in the console or script below
-            corresponding column for x and y to be used for the plot. 
+        '''! initializes. x and y represent the columns that are used for 
+             the respective data. enter either in the console or script below
+             corresponding column for x and y to be used for the plot. 
         '''
         
         self.setpoint1 = setpoint1
@@ -22,8 +22,10 @@ class GcodeInterpreter:
 
         
     def read (self,fileName):
-        ''' opens the csv file and reads all data contained
+        '''! opens the text file and reads all data contained
+             goes line by line, searching for lines with relevant x and y coord data. extracts data and stores it in list.
         '''
+        
         self.mylines = []
         with open(fileName) as f:
             for line in f:
@@ -35,7 +37,9 @@ class GcodeInterpreter:
             
             return self.mylines
   
-    def XConvert (self):
+    def XExtract (self):
+        '''! Extracts the X values from list of data and floats strings.
+        '''
         self.x = []
         self.Theta = []
         for line in self.mylines:
@@ -47,7 +51,7 @@ class GcodeInterpreter:
         return self.x
        
         
-    def YConvert (self):
+    def YExtract (self):
         self.y = []
         for line in self.mylines:
             if 'Y' in line:
@@ -66,14 +70,14 @@ class GcodeInterpreter:
                 self.z.append(1)
         return self.z
     
-    def ThetaGen (self):
+    def ThetaConvert (self):
         for i in range(0, len(self.x)):
             self.Theta.append(math.atan((self.y[i]/self.x[i])*180/math.pi)*16384/360)
             
         
             
         return self.Theta
-    def RGen (self):
+    def RConvert (self):
         for i in range(0, len(self.x)):
             R_len=math.sqrt(self.x[i]**2+self.y[i]**2)
             lintotick=360/1.51
@@ -107,10 +111,10 @@ class GcodeInterpreter:
 if __name__ == '__main__':
     d = GcodeInterpreter()
     full_code = d.read('gcode.txt')
-    x_val = d.XConvert()
-    y_val = d.YConvert()
+    x_val = d.XExtract()
+    y_val = d.YExtract()
     z_val = d.ZConvert()
-    theta_val = d.ThetaGen()
-    r_val = d.RGen()
+    theta_val = d.ThetaConvert()
+    r_val = d.RConvert()
     share_val = d.ShareGen()
     d.plot()
