@@ -63,8 +63,8 @@ zpos = task_share.Share ('h', thread_protect = False, name = "z_Position")
 Rswitch = task_share.Share ('h', thread_protect = False, name = "R_Switch")
 Tswitch = task_share.Share ('h', thread_protect = False, name = "T_Switch")
 
-setpoint1.put(-90)   #Theta Setpoint (Degrees)
-setpoint2.put(-270)    #R setpoint (degrees)
+setpoint1.put(90)     #Theta Setpoint (Degrees)
+setpoint2.put(90)    #R setpoint (degrees)
 xpos.put(4)
 ypos.put(4)
 
@@ -88,15 +88,15 @@ ThEnc=Encoder.Encoder(ENCpin1,ENCpin2,timernumber)
 ThetaControl=ThetaMotorControl.ThetaClosedLoop(Kp1,setpoint1,EncPosition,duty1,xpos,ypos)
 RControl=RMotorControl.RClosedLoop(Kp2,setpoint2,EncPosition2,duty2,xpos,ypos)
 
-# servopin = pyb.Pin (pyb.Pin.board.D6, pyb.Pin.OUT_PP)
-# servotimer =2
-# servoch = 3
+servopin = pyb.Pin (pyb.Pin.board.PA7, pyb.Pin.OUT_PP)
+servotimer =17
+servoch = 1
 
-# switchpin1=pyb.Pin(pyb.Pin.board.D7, pyb.Pin.IN, pyb.Pin.PULL_DOWN) #PB4
-# switchpin2=pyb.Pin(pyb.Pin.board.D9, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
+switchpin1=pyb.Pin(pyb.Pin.board.PA8, pyb.Pin.IN, pyb.Pin.PULL_DOWN) #PB4
+switchpin2=pyb.Pin(pyb.Pin.board.PA6, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
 
-# Servo=ServoMotorF.ServoMotorF(servopin, servotimer, servoch)
-#LSwitch=LimitSwitch.LimitSwitch(switchpin1,switchpin2)
+Servo=ServoMotorF.ServoMotorF(servopin, servotimer, servoch)
+LSwitch=LimitSwitch.LimitSwitch(switchpin1,switchpin2)
 
 zpos.put(0)
 def task1_fun ():
@@ -125,9 +125,20 @@ def task2_fun ():
 def task3_fun():
     while True:        
         # LSwitch.checkswitch()
-        
+        if zpos.get()==0:
+            Servo.up()
+            
+        elif zpos.get()==1:
+            Servo.down()  
+        else: 
+            pass
         yield (0)
         
+def task4_fun():
+    while True:    
+        print('SWitchTask')
+        LSwitch.checkswitch()  
+        yield(0)
 # def task4_fun():
 #     while True:
 #         print ('servo') 
@@ -171,12 +182,12 @@ if __name__=="__main__":
                                             period = 40, profile = True, trace = False)
                         task3 = cotask.Task (task3_fun, name = 'Task_3', priority = 1, 
                                             period = 30, profile = True, trace = False)
-                        # task4 = cotask.Task (task3_fun, name = 'Task_4', priority = 2, 
-                        #                     period = 20, profile = True, trace = False)
+                        task4 = cotask.Task (task3_fun, name = 'Task_4', priority = 3, 
+                                             period = 20, profile = True, trace = False)
                         cotask.task_list.append (task1)
                         cotask.task_list.append (task2)
                         cotask.task_list.append (task3)
-                        # cotask.task_list.append (task4)
+                        cotask.task_list.append (task4)
                     
                         # Run the memory garbage collector to ensure memory is as defragmented as
                         # possible before the real-time scheduler is started
