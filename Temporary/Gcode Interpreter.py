@@ -9,15 +9,15 @@ import math
     
 class GcodeInterpreter:
     
-    def __init__(self,ThetaArray,RArray,setpoint1,setpoint2):
+    def __init__(self):
         '''! initializes. x and y represent the columns that are used for 
              the respective data. enter either in the console or script below
              corresponding column for x and y to be used for the plot. 
         '''
-        self.ThetaArray = ThetaArray
-        self.RArray = RArray
-        self.setpoint1 = setpoint1
-        self.setpoint2 = setpoint2
+        # self.ThetaArray = ThetaArray
+        # self.RArray = RArray
+        # self.setpoint1 = setpoint1
+        # self.setpoint2 = setpoint2
         self.Theta = [] 
         self.R = []
 
@@ -82,7 +82,7 @@ class GcodeInterpreter:
             self.Theta.append(math.atan((self.y[i]/self.x[i])*180/math.pi)*16384/360)
             
         
-            
+        print (self.Theta)    
         return self.Theta
     def RConvert (self):
         '''! Intakes extracted x and y values and converts them into corresponding angles for the encoder to read for R position
@@ -91,7 +91,7 @@ class GcodeInterpreter:
             R_len=math.sqrt(self.x[i]**2+self.y[i]**2)
             lintotick=360/1.51
             self.R.append(R_len*lintotick)
-            
+        print (self.R)    
         return self.R
         
     
@@ -170,12 +170,12 @@ class GcodeInterpreter:
 
 if __name__ == '__main__':
     d = GcodeInterpreter()
-    #full_code = d.read('gcode.txt')
-    # x_val = d.XExtract()
-    # y_val = d.YExtract()
-    # z_val = d.ZConvert()
-    # theta_val = d.ThetaConvert()
-    # r_val = d.RConvert()
-    aio = d.AIO('gcode.txt')
-    share_val = d.ShareGen()
+    full_code = d.read('gcode.txt')
+    x_val = d.XExtract()
+    y_val = d.YExtract()
+    z_val = d.ZConvert()
+    theta_val = d.ThetaConvert()
+    r_val = d.RConvert()
+    # aio = d.AIO('gcode.txt')
+    #share_val = d.ShareGen()
     d.plot()
