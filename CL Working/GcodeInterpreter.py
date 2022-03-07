@@ -9,16 +9,15 @@ import math
 import time  
 class GcodeInterpreter:
     
-    #def __init__(self,ThetaArray,RArray,setpoint1,setpoint2):
-    def __init__(self):
+    def __init__(self,ThetaArray,RArray,setpoint1,setpoint2):
         '''! initializes. x and y represent the columns that are used for 
              the respective data. enter either in the console or script below
              corresponding column for x and y to be used for the plot. 
         '''
-        # self.ThetaArray = ThetaArray
-        # self.RArray = RArray
-        # self.setpoint1 = setpoint1
-        # self.setpoint2 = setpoint2
+        self.ThetaArray = ThetaArray
+        self.RArray = RArray
+        self.setpoint1 = setpoint1
+        self.setpoint2 = setpoint2
         self.Theta = [] 
         self.R = []
 
@@ -135,17 +134,16 @@ class GcodeInterpreter:
         
         for line in self.mylines:
             if 'X' in line:
-                val = float(line[4:10])
-                self.x.append(val)
-                
+                xval = float(line[4:10])
+                self.x.append(xval)
             else:
                 pass
             
         self.y = []
         for line in self.mylines:
             if 'Y' in line:
-                val = float(line[12:19])
-                self.y.append(val)
+                yval = float(line[12:19])
+                self.y.append(yval)
             else:
                 pass
             
@@ -164,11 +162,11 @@ class GcodeInterpreter:
             lintotick=360/1.51
             self.R.append(R_len*lintotick)
             
-        # self.ThetaArray.put(self.Theta)
-        # self.RArray.put(self.R)
+        self.ThetaArray.put(self.Theta)
+        self.RArray.put(self.R)
             
-        # return self.ThetaArray , self.RArray
-        return(self.R,self.Theta)
+        return self.ThetaArray , self.RArray
+        
         
 
 if __name__ == '__main__':
@@ -179,6 +177,6 @@ if __name__ == '__main__':
     # z_val = d.ZConvert()
     # theta_val = d.ThetaConvert()
     # r_val = d.RConvert()
-    aio = d.AIO('SQUARE.txt')
+    aio = d.AIO('gcode.txt')
     share_val = d.ShareGen()
-    #d.plot()
+    d.plot()
