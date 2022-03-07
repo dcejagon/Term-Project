@@ -23,7 +23,8 @@ class RClosedLoop:
         @details This code allows us to run the motor/encoder system within a closed loop.
     '''
     
-    def __init__(self,Kp2,setpoint2,EncPosition2,duty2,xpos,ypos):
+    #def __init__(self,Kp2,setpoint2,EncPosition2,duty2,xpos,ypos):
+    def __init__(self,Kp2,setpoint2,EncPosition2,duty2):
         ''' @brief          Constructs a closed loop object
             @details        Sets up the closed loop so that it can intake data from the encoder and main to send to the motor driver.
             @param Kp       This parameter allows us to choose the gain utilized by the system
@@ -56,9 +57,9 @@ class RClosedLoop:
         #
         #
         #
-        self.xpos=xpos
+        # self.xpos=xpos
         
-        self.ypos=ypos
+        # self.ypos=ypos
         #
         #
         #
@@ -106,7 +107,7 @@ class RClosedLoop:
         ## @brief the duty cycle required for the system to correct with set gain.
         #print(self.error2)
         
-        print('R Encoder Position:',self.EncPosition2.get()*360/(4096*4))
+        #print('R Encoder Position:',self.EncPosition2.get()*360/(4096*4))
         self.actuation2=self.Kp2.get()*self.error2
         #print(self.actuation2)
         self.duty2.put(self.actuation2)

@@ -16,16 +16,40 @@ class ServoMotorF:
         
         self.tim17 = pyb.Timer (17, freq=75)
         self.ch1 = self.tim17.channel (1, pyb.Timer.PWM, pin=self.pinA7)
+        
     def up(self):
         # PWM % of 1 is pointing down towards the sharpie tip, and increase to move the pen upwards
         self.ch1.pulse_width_percent(16)
         #print('Pen Raised')
         return 1
     def down(self):
-        self.ch1.pulse_width_percent(10)
+        self.ch1.pulse_width_percent(7)
         #print('Pen Lowered')
         return 2
     
+class LimitSwitch:
+    
+    def __init__(self,switchpin1,switchpin2,duty2,Rswitch):
+        self.switchpin1=switchpin1
+        self.switchpin2=switchpin2
+        self.duty2=duty2
+        self.Rswitch=Rswitch
+    print('initializing limit switch')
+    def checkswitch(self):
+        #print('CHECKING SWITCH')
+        #R=self.switch_pin1.value()
+        #T=self.switch_pin2.value()
+        
+        if self.switchpin1.value()==1:
+            #print('val=1')
+            self.Rswitch.put(self.switchpin1.value())
+            #print(self.Rswitch.get())
+        elif self.switchpin1.value()==0:
+            #print('val=2')
+            self.Rswitch.put(self.switchpin1.value())
+            self.duty2.put(0)
+            print(self.Rswitch.get())
+            
 if __name__ == "__main__":
     # pinD6 = pyb.Pin (pyb.Pin.board.D6, pyb.Pin.OUT_PP)
     # tim2 = pyb.Timer (2, freq=75)

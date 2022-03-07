@@ -6,7 +6,7 @@ Created on Fri Mar  4 17:18:34 2022
 """
 #from matplotlib import pyplot as plt
 import math
-    
+import time  
 class GcodeInterpreter:
     
     def __init__(self,ThetaArray,RArray,setpoint1,setpoint2):
@@ -131,10 +131,12 @@ class GcodeInterpreter:
                 
         self.x = []
         self.Theta = []
+        
         for line in self.mylines:
             if 'X' in line:
                 val = float(line[4:10])
                 self.x.append(val)
+                
             else:
                 pass
             

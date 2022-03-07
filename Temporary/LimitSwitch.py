@@ -6,9 +6,10 @@ Created on Thu Mar  3 22:56:00 2022
 """
 class LimitSwitch:
     
-    def __init__(self,switchpin1,switchpin2):
+    def __init__(self,switchpin1,switchpin2,duty2):
         self.switchpin1=switchpin1
         self.switchpin2=switchpin2
+        self.duty2=duty2
     print('initializing limit switch')
     def checkswitch(self):
         
