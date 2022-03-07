@@ -4,7 +4,7 @@ Created on Fri Mar  4 17:18:34 2022
 
 @author: kepte
 """
-#from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 import math
 import time  
 class GcodeInterpreter:
@@ -109,16 +109,16 @@ class GcodeInterpreter:
             
         
     
-    # def plot (self):
-    #       ''' generates the desired plot to verify gcode.
-    #       '''
+    def plot (self):
+          ''' generates the desired plot to verify gcode.
+          '''
          
-    #       plt.plot(self.x,self.y, color='purple', linestyle='dashed')
-    #       #plt.grid(color='orange', linestyle='-', linewidth=1)
-    #       plt.xlabel('x position')
-    #       plt.ylabel('y position')
-    #       plt.title('Verification Display')
-    #       plt.show()
+          plt.plot(self.x,self.y, color='purple', linestyle='dashed')
+          #plt.grid(color='orange', linestyle='-', linewidth=1)
+          plt.xlabel('x position')
+          plt.ylabel('y position')
+          plt.title('Verification Display')
+          plt.show()
           
     def AIO (self,fileName):
         
@@ -170,15 +170,24 @@ class GcodeInterpreter:
         # return self.ThetaArray , self.RArray
         return(self.R,self.Theta)
         
-
+    def TxtCreate (self):
+        with open("Rcode.txt", "w") as f:
+            R_str = str(self.R)
+            f.write(R_str)
+        
+        with open("Tcode.txt", "w+") as g:
+            Theta_str = str(self.Theta)
+            g.write(Theta_str)
+        
 if __name__ == '__main__':
     d = GcodeInterpreter()
-    #full_code = d.read('gcode.txt')
-    # x_val = d.XExtract()
-    # y_val = d.YExtract()
-    # z_val = d.ZConvert()
-    # theta_val = d.ThetaConvert()
-    # r_val = d.RConvert()
-    aio = d.AIO('SQUARE.txt')
-    share_val = d.ShareGen()
-    #d.plot()
+    full_code = d.read('SQUARE.txt')
+    x_val = d.XExtract()
+    y_val = d.YExtract()
+    z_val = d.ZConvert()
+    theta_val = d.ThetaConvert()
+    r_val = d.RConvert()
+    # aio = d.AIO('SQUARE.txt')
+    # share_val = d.ShareGen()
+    d.plot()
+    d.TxtCreate()
