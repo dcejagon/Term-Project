@@ -4,21 +4,20 @@ Created on Fri Mar  4 17:18:34 2022
 
 @author: kepte
 """
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 import math
-import time  
+    
 class GcodeInterpreter:
     
-    #def __init__(self,ThetaArray,RArray,setpoint1,setpoint2):
-    def __init__(self):
+    def __init__(self,ThetaArray,RArray,setpoint1,setpoint2):
         '''! initializes. x and y represent the columns that are used for 
              the respective data. enter either in the console or script below
              corresponding column for x and y to be used for the plot. 
         '''
-        # self.ThetaArray = ThetaArray
-        # self.RArray = RArray
-        # self.setpoint1 = setpoint1
-        # self.setpoint2 = setpoint2
+        self.ThetaArray = ThetaArray
+        self.RArray = RArray
+        self.setpoint1 = setpoint1
+        self.setpoint2 = setpoint2
         self.Theta = [] 
         self.R = []
 
@@ -109,16 +108,16 @@ class GcodeInterpreter:
             
         
     
-    def plot (self):
-          ''' generates the desired plot to verify gcode.
-          '''
+    # def plot (self):
+    #       ''' generates the desired plot to verify gcode.
+    #       '''
          
-          plt.plot(self.x,self.y, color='purple', linestyle='dashed')
-          #plt.grid(color='orange', linestyle='-', linewidth=1)
-          plt.xlabel('x position')
-          plt.ylabel('y position')
-          plt.title('Verification Display')
-          plt.show()
+    #       plt.plot(self.x,self.y, color='purple', linestyle='dashed')
+    #       #plt.grid(color='orange', linestyle='-', linewidth=1)
+    #       plt.xlabel('x position')
+    #       plt.ylabel('y position')
+    #       plt.title('Verification Display')
+    #       plt.show()
           
     def AIO (self,fileName):
         
@@ -132,12 +131,10 @@ class GcodeInterpreter:
                 
         self.x = []
         self.Theta = []
-        
         for line in self.mylines:
             if 'X' in line:
                 val = float(line[4:10])
                 self.x.append(val)
-                
             else:
                 pass
             
@@ -164,30 +161,21 @@ class GcodeInterpreter:
             lintotick=360/1.51
             self.R.append(R_len*lintotick)
             
-        # self.ThetaArray.put(self.Theta)
-        # self.RArray.put(self.R)
+        self.ThetaArray.put(self.Theta)
+        self.RArray.put(self.R)
             
-        # return self.ThetaArray , self.RArray
-        return(self.R,self.Theta)
+        return self.ThetaArray , self.RArray
         
-    def TxtCreate (self):
-        with open("Rcode.txt", "w") as f:
-            R_str = str(self.R)
-            f.write(R_str)
         
-        with open("Tcode.txt", "w+") as g:
-            Theta_str = str(self.Theta)
-            g.write(Theta_str)
-        
+
 if __name__ == '__main__':
     d = GcodeInterpreter()
-    full_code = d.read('simple.txt')
-    x_val = d.XExtract()
-    y_val = d.YExtract()
-    z_val = d.ZConvert()
-    theta_val = d.ThetaConvert()
-    r_val = d.RConvert()
-    # aio = d.AIO('SQUARE.txt')
-    # share_val = d.ShareGen()
+    #full_code = d.read('gcode.txt')
+    # x_val = d.XExtract()
+    # y_val = d.YExtract()
+    # z_val = d.ZConvert()
+    # theta_val = d.ThetaConvert()
+    # r_val = d.RConvert()
+    aio = d.AIO('gcode.txt')
+    share_val = d.ShareGen()
     d.plot()
-    d.TxtCreate()
