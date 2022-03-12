@@ -1,4 +1,4 @@
-# Term Project Proposal 
+# Term Project Report 
 ### Description 
 For our term project, have designed a 2.5 axis plotter. This plotter will have 
 a rotating arm with a carriage that extends out on the arm. The plotter will move
