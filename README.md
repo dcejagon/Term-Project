@@ -19,7 +19,7 @@ access to with no cost. Our main source for parts will be Amazon to eliminate
 shipping costs. Team members have access to 3D printers, which will be used 
 to fabricate custom parts such as mounting brackets, main Sharpie carriage, 
 and motor mounts at no additional cost.  
-### Preliminary BOM and Estimated Cost
+### BOM and Estimated Cost
 | Qty. | Part                  | Source                | Est. Cost |
 |:----:|:----------------------|:----------------------|:---------:|
 |  2   | Pittperson Gearmotors | ME405 Tub             |     -     |
@@ -31,7 +31,7 @@ and motor mounts at no additional cost.
 |  1   | Vbearings and Belt    | Amazon                |   $18.59  |
 |  1   | 2020 Al Extrusion     | Amazon                |   $19.99  |
 
-### Sketch of Proposed Plotter 
+### Sketch of Pen Plotter 
 The initial sketch of our system is shown below. This design features prelinimary
 dimensions and a sketch of the general shape and motion of our system. The blue lines
 depict the direction that the system may move, and the axis that this motion occurs on.
