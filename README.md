@@ -19,6 +19,14 @@ access to with no cost. Our main source for parts will be Amazon to eliminate
 shipping costs. Team members have access to 3D printers, which will be used 
 to fabricate custom parts such as mounting brackets, main Sharpie carriage, 
 and motor mounts at no additional cost.  
+### Use
+This 2.5 axis plotter is intended to be used to plot images on a piece of paper. 
+However, the main carriage of this plotter could be easily changed to accomodate 
+a CO2 laser or small cutting blade to turn the plotter into a laser cutter or a 
+vinyl cutter.  This project was just intended to be used by our team to demonstrate
+many of the concepts that we learned in ME 405, Mechatronics, however I think it would 
+be interesting to redesign some of the motor mounts to accept more consumer grade motors
+so that we could each produce our own plotter for personal use. 
 ### BOM and Estimated Cost
 | Qty. | Part                  | Source                | Est. Cost |
 |:----:|:----------------------|:----------------------|:---------:|
@@ -74,6 +82,13 @@ the torque required to rotate the arm.
 Each of the motor mounting brackets have holes that have heat set inserts in them
 so we can use screws to act as set screws to hold the motors in place. 
 
+The motor bracket on the aluminum extrusion also holds a limit switch. This switch 
+will act as a "kill switch" so that if the motor ever hits it, the motor duty will 
+instantly be set to zero. This switch was initially going to be used to home the R
+axis, however we had an issue where our motors would freespin after the program finished
+running, and changing the switch to be a kill switch prevents the mechanical system 
+from tearing itself apart and the motors from burning up. 
+
 ![CAD of Full System, Front](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/FullSysCAD.png)
 CAD model of full system front view
 
@@ -99,7 +114,7 @@ rotates , which pushes against pin attached to the Sharpie carriage, causing
 vertical movement of the Sharpie carriage. 
 
 The small, "r" shaped slots on either side of the main carriage are where the ends
-of hte belt to move the main carriage are attached.  
+of the belt to move the main carriage are attached.  
 
 ![CAD of main carriage, raised](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/SharpieCarriageUp.png)
 CAD model of main carriage in "up" position
@@ -107,3 +122,96 @@ CAD model of main carriage in "up" position
 
 ![CAD of main carriage, lowered](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/SharpieCarriageDown.png)
 CAD model of main carriage in "down" position
+
+### Software Design Overview
+In order to generate the path that the pen should take, we used http://jscut.org/jscut.html# ,
+a website that accepts SVG images and converts it to GCODE. This website was nice, because 
+each of the GCODE lines were G1, which is the call for a straight line. The GCODE that 
+this website outputs is a series of straight lines that are very short (around 0.001"). 
+This means, we essentially have a list of X-Y coordinates that trace out our image. 
+
+We then use the file GcodeInterpreter.py, to take each line of GCODE, pull out the 
+desired X-Y coordinates, and then preform some math to convert these to R-Theta
+coordinates. From these R-Theta coordinates, we use our known gear ratios to write
+the desired R Motor angle and Theta Motor angle to their own .txt files. 
+
+We then read each line of these files one at a time, to generate the desired
+R and Theta motor setpoints. 
+
+We then input these setpoints into a closed loop controller which will calculate the
+required duty to move the motor so that the motor position reaches the setpoint. 
+
+We determine the motor position from encoders that are attached to the motor shaft. 
+
+The timing of these different tasks was soemthing that we had some trouble implementing,
+however, we were able to achieve the propper timing by adding two buffer variables. 
+Essentially, first, we get both setpoints, then, the motors rotate to try and reach that setpoint
+next, we check to see if each motor has reached its setpoint (or within a few degrees of it).
+If the motor has not reached this setpoint, we do not get another setpoint. As soon as the motor 
+reaches its setpoint, on its next loop around the task diagram, we generate a new setpoint. 
+This process allows us to be sure that our motors reach their desired setpoint before they
+transition to another one. 
+
+In addition, the motor control task has three sub-tasks running. 
+First, we read the motor positon from the encoders. Next, we run the closed loop
+controller. Last, we use the motor duty that comes out of the closed loop file
+to run our motors at this duty. It is important that the motor control task runs 
+as quickly as possibleso that the closed loop controller can calculate be sure the
+motor reaches the desired positon as quickly as possible, while minimising overshoot. 
+
+Lastly, we had a task that controlled the limit switch reading and servo motor actuation.
+The limit switch subtask checks the limit switch value (0 or 1) and decides if the duty needs to be set 
+to zero. The servo motor subtask checks to see if the pen should lifted or lowered,
+and then raised or lowers the servo motor. 
+
+A more in-depth description of each file, along with the overall software structure
+can be found in the links below. 
+
+GCODE Interpreter:         [LINK]
+Encoder Driver:            [Link]
+Closed Loop Controller:    [Link]
+Motor Driver:              [Link]
+Limit Switch:              [Link]
+Servo Motor:               [Link]
+
+
+### System Preformance and Results
+We tested our system by trying to draw several images. We attempted to draw a 
+Cal Poly logo, as well as a simple rectangle. These test revealed some errors
+in our software design somewhere. We were able to successfully draw, however, we
+were not able to produce a discernable image. We believe that it has somehting to 
+do with the path the pen is taking between the points. For the rectangle, we can see
+the image has four distict "points", but the paths between these points is anything 
+but a straight line. With more time, we would be able to hammer out the bugs in
+our system and correct the paths between points. Overall, we are happy with what 
+we were able to accomplish during the entirety of this project. 
+
+### Possible System Modifications
+Outside of the path issue mentioned above, one of our biggest issues was the 
+resolution our motors were able to acomplish. We think that we prioritized speed 
+more than accuracy, which means we tried to minimize the gear ratios that we were 
+using. The motors we were using have a minimum duty that will make them rotate. 
+Significant issues arrise when the desired position is too close to the previous 
+position, becasue the motor cannot rotate with this small of a duty. By increasing 
+the gear ratios we are using significantly, we would increase the resolution that 
+we can plot. Instead of 2 points that are very close producing a duty of 10 for example,
+with the increased gear ratio, we can have the same two points, produce a duty of 50 or even 100.
+This would allow for our plotted pictures to be very clear, with the effect of 
+significantly decreasing the speed at which we can plot. 
+
+In addition, we should have had our platform 
+that the parts are mounted to extend out so that every part of the system rests
+on this platform. This would mininimize the amount of flex from the point of rotation
+to the end of the extrusion. 
+
+One of the last things that was somewhat of an issue, was our heat set inserts. 
+When we tightened the screws to hold the motor in place, the inserts began to pull 
+out of their holes. We think this could be resolved by reducing the size of the holes
+or using different inserts. 
+
+Some of the things that do not need modification is how the main carriage rides on
+the aluminum extrusion. We are able to produce a very smooth linear movement of the
+carriage when we rotate the motor. In addition, the way the way our differnet tasks
+iteracted with eachother was largely successful. Once we figured out the propper 
+timing, our software worked as intended, and ironing out the path issue would
+not require much rework to our task layout. 
