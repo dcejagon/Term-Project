@@ -167,7 +167,7 @@ and then raised or lowers the servo motor.
 A more in-depth description of each file, along with the overall software structure
 can be found in the links below. 
 
-GCODE Interpreter:         [https://github.com/dcejagon/Term-Project/blob/e9a6a358911b557f958eb8ccfb334c0a805cc6d8/src/GcodeInterpreter.py]
+GCODE Interpreter:         [https://github.com/dcejagon/Term-Project/blob/e9a6a358911b557f958eb8ccfb334c0a805cc6d8/src/GcodeInterpreter.py] \n
 Encoder Driver:            [https://github.com/dcejagon/Term-Project/blob/e9a6a358911b557f958eb8ccfb334c0a805cc6d8/src/EncoderDriver.py]
 Closed Loop Controller:    [https://github.com/dcejagon/Term-Project/blob/e9a6a358911b557f958eb8ccfb334c0a805cc6d8/src/RMotorControl.py]
 Motor Driver:              [https://github.com/dcejagon/Term-Project/blob/e9a6a358911b557f958eb8ccfb334c0a805cc6d8/src/MotorDriver.py]
