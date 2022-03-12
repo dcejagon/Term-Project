@@ -215,3 +215,7 @@ carriage when we rotate the motor. In addition, the way the way our differnet ta
 iteracted with eachother was largely successful. Once we figured out the propper 
 timing, our software worked as intended, and ironing out the path issue would
 not require much rework to our task layout. 
+
+Here is the link to the folder that contains all of our solidworks files as well
+as STL's used for 3D printing. 
+[https://github.com/dcejagon/Term-Project/tree/bce21b94aa009a9af5754362cd7ddc3f18eb79eb/TP%20CAD]
