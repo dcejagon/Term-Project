@@ -74,8 +74,12 @@ the torque required to rotate the arm.
 Each of the motor mounting brackets have holes that have heat set inserts in them
 so we can use screws to act as set screws to hold the motors in place. 
 
-![CAD of Full System](https://github.com/dcejagon/Term-Project/blob/1b538ee28f59977871e3b20c34f9b20de40c2d71/maincar.png)
-CAD model of full system
+![CAD of Full System, Front](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/FullSysCAD.png)
+CAD model of full system front view
+
+![CAD of Full System, Rear](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/FullSysCAD2.png)
+CAD model of full system rear view
+
 
 ### Main Carriage Subsystem CAD Model
 
@@ -87,7 +91,7 @@ of the carriage on the extrusion.
 
 The blue rectangular piece is the servo motor that is responsible for actuating our 
 half axis. The servo motor is attached to the carriage with rubber bands so it can
-be repurposed for other projects. The servo motor has a small link attached to it.
+be repurposed for other projects. The servo motor has a small link (white part) attached to it.
 This link has a hole on one side to press fit onto the servo shaft, and a slot 
 on the other. This slot will have a "pin" that attaches to the sliding carriage 
 where the Sharpie is attached. When the servo motor is rotated, the slotted linkage
@@ -97,5 +101,8 @@ vertical movement of the Sharpie carriage.
 The small, "r" shaped slots on either side of the main carriage are where the ends
 of hte belt to move the main carriage are attached.  
 
-![CAD of main carriage](https://github.com/dcejagon/Term-Project/blob/1b538ee28f59977871e3b20c34f9b20de40c2d71/maincar.png)
-CAD model of main carriage 
+![CAD of main carriage, raised](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/SharpieCarriageUp.png)
+CAD model of main carriage in "up" position
+
+![CAD of main carriage, lowered](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/SharpieCarriageDown.png)
+CAD model of main carriage in "down" position
