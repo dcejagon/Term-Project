@@ -104,5 +104,6 @@ of hte belt to move the main carriage are attached.
 ![CAD of main carriage, raised](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/SharpieCarriageUp.png)
 CAD model of main carriage in "up" position
 
+
 ![CAD of main carriage, lowered](https://github.com/dcejagon/Term-Project/blob/f340f8d59cd680c3848f8afeec37d6229f56b2f1/SharpieCarriageDown.png)
 CAD model of main carriage in "down" position
