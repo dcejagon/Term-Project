@@ -10,8 +10,8 @@ position of the pen carrier(R). The radial motor will control the pen location b
 moving the sharpie carriage using belts driven by pulleys. The pen carriage will have a servo motor 
 that controls the up and down motion of the pen (0.5 Axis). This plotter will 
 convert an image to X-Y Gcode, and then we will convert that into cylindrical, 
-R-Theta, coordinats due to our system being inheriently non-rectilinear. 
-In addition, This plotter should berelatively low cost ~$15 per person. 
+R-Theta, coordinates due to our system being inherently non-rectilinear. 
+In addition, This plotter should be relatively low cost ~$15 per person. 
 We intend to use materials commonly used in 3D printing like Aluminum T-Slot 
 extrusion and V-Slot bearings. The full bill of materials and cost breakdown 
 is seen below. Items that have a "-" in the cost column are parts that we have 
@@ -21,7 +21,7 @@ to fabricate custom parts such as mounting brackets, main Sharpie carriage,
 and motor mounts at no additional cost.  
 ### Use
 This 2.5 axis plotter is intended to be used to plot images on a piece of paper. 
-However, the main carriage of this plotter could be easily changed to accomodate 
+However, the main carriage of this plotter could be easily changed to accommodate 
 a CO2 laser or small cutting blade to turn the plotter into a laser cutter or a 
 vinyl cutter.  This project was just intended to be used by our team to demonstrate
 many of the concepts that we learned in ME 405, Mechatronics, however I think it would 
@@ -40,7 +40,7 @@ so that we could each produce our own plotter for personal use.
 |  1   | 2020 Al Extrusion     | Amazon                |   $19.99  |
 
 ### Sketch of Pen Plotter 
-The initial sketch of our system is shown below. This design features prelinimary
+The initial sketch of our system is shown below. This design features preliminary
 dimensions and a sketch of the general shape and motion of our system. The blue lines
 depict the direction that the system may move, and the axis that this motion occurs on.
 For example, the curved blue arrows and the Theta axis show that our "arm" will rotate
@@ -75,8 +75,8 @@ These bearings rotate on a 3/8" bolt which is the "axle" for our arm to rotate o
 In addition, the red pulley is around twice the diameter of the pulley attached to the motor 
 which gives us a larger gear ratio to transmit more torque from the motor to our system. 
 
-The large wheel on the end of the extrusion is necessasry to provide support to the 
-end of our arm. The wheel prevents the arm from being a cantelevered beam, and reduces
+The large wheel on the end of the extrusion is necessary to provide support to the 
+end of our arm. The wheel prevents the arm from being a cantilevered beam, and reduces
 the torque required to rotate the arm. 
 
 Each of the motor mounting brackets have holes that have heat set inserts in them
@@ -85,7 +85,7 @@ so we can use screws to act as set screws to hold the motors in place.
 The motor bracket on the aluminum extrusion also holds a limit switch. This switch 
 will act as a "kill switch" so that if the motor ever hits it, the motor duty will 
 instantly be set to zero. This switch was initially going to be used to home the R
-axis, however we had an issue where our motors would freespin after the program finished
+axis, however we had an issue where our motors would free-spin after the program finished
 running, and changing the switch to be a kill switch prevents the mechanical system 
 from tearing itself apart and the motors from burning up. 
 
@@ -143,8 +143,8 @@ required duty to move the motor so that the motor position reaches the setpoint.
 
 We determine the motor position from encoders that are attached to the motor shaft. 
 
-The timing of these different tasks was soemthing that we had some trouble implementing,
-however, we were able to achieve the propper timing by adding two buffer variables. 
+The timing of these different tasks was something that we had some trouble implementing,
+however, we were able to achieve the proper timing by adding two buffer variables. 
 Essentially, first, we get both setpoints, then, the motors rotate to try and reach that setpoint
 next, we check to see if each motor has reached its setpoint (or within a few degrees of it).
 If the motor has not reached this setpoint, we do not get another setpoint. As soon as the motor 
@@ -153,11 +153,11 @@ This process allows us to be sure that our motors reach their desired setpoint b
 transition to another one. 
 
 In addition, the motor control task has three sub-tasks running. 
-First, we read the motor positon from the encoders. Next, we run the closed loop
+First, we read the motor position from the encoders. Next, we run the closed loop
 controller. Last, we use the motor duty that comes out of the closed loop file
 to run our motors at this duty. It is important that the motor control task runs 
-as quickly as possibleso that the closed loop controller can calculate be sure the
-motor reaches the desired positon as quickly as possible, while minimising overshoot. 
+as quickly as possible so that the closed loop controller can calculate be sure the
+motor reaches the desired position as quickly as possible, while minimizing overshoot. 
 
 Lastly, we had a task that controlled the limit switch reading and servo motor actuation.
 The limit switch subtask checks the limit switch value (0 or 1) and decides if the duty needs to be set 
@@ -172,24 +172,24 @@ Full Source Code:          [https://github.com/dcejagon/Term-Project/blob/e9a6a3
 Documentation:             [https://github.com/dcejagon/Term-Project/blob/e9a6a358911b557f958eb8ccfb334c0a805cc6d8/docs]
 
 
-### System Preformance and Results
+### System Performance and Results
 We tested our system by trying to draw several images. We attempted to draw a 
 Cal Poly logo, as well as a simple rectangle. These test revealed some errors
 in our software design somewhere. We were able to successfully draw, however, we
-were not able to produce a discernable image. We believe that it has somehting to 
+were not able to produce a discernable image. We believe that it has something to 
 do with the path the pen is taking between the points. For the rectangle, we can see
-the image has four distict "points", but the paths between these points is anything 
+the image has four distinct "points", but the paths between these points is anything 
 but a straight line. With more time, we would be able to hammer out the bugs in
 our system and correct the paths between points. Overall, we are happy with what 
 we were able to accomplish during the entirety of this project. 
 
 ### Possible System Modifications
 Outside of the path issue mentioned above, one of our biggest issues was the 
-resolution our motors were able to acomplish. We think that we prioritized speed 
+resolution our motors were able to accomplish. We think that we prioritized speed 
 more than accuracy, which means we tried to minimize the gear ratios that we were 
 using. The motors we were using have a minimum duty that will make them rotate. 
-Significant issues arrise when the desired position is too close to the previous 
-position, becasue the motor cannot rotate with this small of a duty. By increasing 
+Significant issues arise when the desired position is too close to the previous 
+position, because the motor cannot rotate with this small of a duty. By increasing 
 the gear ratios we are using significantly, we would increase the resolution that 
 we can plot. Instead of 2 points that are very close producing a duty of 10 for example,
 with the increased gear ratio, we can have the same two points, produce a duty of 50 or even 100.
@@ -198,7 +198,7 @@ significantly decreasing the speed at which we can plot.
 
 In addition, we should have had our platform 
 that the parts are mounted to extend out so that every part of the system rests
-on this platform. This would mininimize the amount of flex from the point of rotation
+on this platform. This would minimize the amount of flex from the point of rotation
 to the end of the extrusion. 
 
 One of the last things that was somewhat of an issue, was our heat set inserts. 
@@ -208,11 +208,11 @@ or using different inserts.
 
 Some of the things that do not need modification is how the main carriage rides on
 the aluminum extrusion. We are able to produce a very smooth linear movement of the
-carriage when we rotate the motor. In addition, the way the way our differnet tasks
-iteracted with eachother was largely successful. Once we figured out the propper 
+carriage when we rotate the motor. In addition, the way the way our different tasks
+interacted with each other was largely successful. Once we figured out the proper 
 timing, our software worked as intended, and ironing out the path issue would
 not require much rework to our task layout. 
 
-Here is the link to the folder that contains all of our solidworks files as well
+Here is the link to the folder that contains all of our Solidworks files as well
 as STL's used for 3D printing. 
 [https://github.com/dcejagon/Term-Project/tree/bce21b94aa009a9af5754362cd7ddc3f18eb79eb/TP%20CAD]
