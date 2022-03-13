@@ -95,7 +95,7 @@ motor2=MotorDriver.MotorDriver(en_pin, en_pin2, in1pin, in2pin, in1pin2, in2pin2
 ENC1=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition,EncPosition2)
 #ENC2=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition,EncPosition2)
 ENC2=REncoder.EncoderDriver(ENC2pin1,ENC2pin2,timernumber2,EncPosition2)
-ThEnc=Encoder.Encoder(ENCpin1,ENCpin2,timernumber)
+#ThEnc=Encoder.Encoder(ENCpin1,ENCpin2,timernumber)
 #ThEnc2=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition1,EncPosition2)
 
 # Cl1=ClosedLoop.ClosedLoop(Kp1,Kp2,setpoint1,setpoint2,EncPosition,EncPosition2,duty1,duty2,time)
