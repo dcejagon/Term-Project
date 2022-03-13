@@ -171,7 +171,6 @@ Full Source Code:          [https://github.com/dcejagon/Term-Project/blob/e9a6a3
 
 Documentation:             [https://dcejagon.github.io/Term-Project/]
 
-
 ### System Performance and Results
 We tested our system by trying to draw several images. We attempted to draw a 
 Cal Poly logo, as well as a simple rectangle. These test revealed some errors
