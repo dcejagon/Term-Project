@@ -25,9 +25,14 @@
 var NAVTREE =
 [
   [ "Clapp_Kephart_Gonzalez_Project", "index.html", [
-    [ "ME 405 Term Project Wk8 Progress Check", "index.html#sec_intro", null ],
+    [ "ME 405 Term Project Software Description", "index.html#sec_intro", null ],
     [ "Task Diagram and File Structure", "index.html#sec_lb1", null ],
-    [ "FSM for each task", "index.html#sec_lb2", null ],
+    [ "main.py", "index.html#sec_lb2", null ],
+    [ "EncoderDriver.py and Encoder.py", "index.html#sec_lb3", null ],
+    [ "MotorDriver.py", "index.html#sec_lb4", null ],
+    [ "ThetaMotorControl.py and RMotorControl.py", "index.html#sec_lb5", null ],
+    [ "ServoMotorF.py", "index.html#sec_lb6", null ],
+    [ "GcodeInterpreter.py", "index.html#sec_lb7", null ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ]
     ] ]
