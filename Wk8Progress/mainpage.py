@@ -37,10 +37,13 @@ GcodeInterpreter.py- Writed R and Theta Setpoints to .txt file to be read later
    
 
 The Task Diagram showing how these files are used is seen below
-\image html TaskDiagramTermProject.PNG "Task Diagram and Important Shares"  width=900px  
-This diagram shows the task/subtask diagram model for our code. We are running 3 tasks,
+\image html OverallTask.PNG "Task Diagram and Important Shares"  width=900px  
+\image html SubTask.PNG "Task Diagram and Important Shares"  width=900px 
+The frist image shows the Overall Task Diagram that is running in our system, and the second
+shows the subtasks that are running inside of each task. We are running 3 tasks,
 each represented by a different color box, Blue is task1, Red is task2, and Green is
 task3. If there are multiple boxes of the same color, they are treated as subtasks.
+Each of this subtasks and their shares is shown in the second picture. 
 Each of the shares we are using is represented with a dashed line pointing from where
 the variable is written to where the variable is read. We chose to split the task diagram
 up this way so that it better demonstrated what is happening with each share. 
@@ -90,7 +93,7 @@ to true so that our code konws when it should generate a new setpoint.
 
 The FSM for the Motor Tasks (including EncoderDriver.py, Control Loops, and MotorDriver.py)
 is shown below. 
-\image html FSMTermProject.png "FSMs for Motor Control Task" width=900px   
+\image html MotorControlFSM.png "FSMs for Motor Control Task" width=900px   
 
 @section sec_lb2    ServoMotorF.py
 This file is responsible for controling our servo motor and limit switch. We have classes
@@ -108,7 +111,7 @@ of the pin is 0, we set the duty of the R motor to 0 to prevent the hardware fro
 tearing itself apart. 
 
 The FSM for this file is shown below
-\image html FSMTermProject.png "FSMs for Servo Motor" width=900px   
+\image html ServoFSM.png "FSMs for Servo Motor" width=900px   
 
 @section sec_lb2    GcodeInterpreter.py
 In order to generate the path that the pen should take, we used http://jscut.org/jscut.html# ,
@@ -127,16 +130,7 @@ This is only done when the motor has reached its previous setpoint and the buffe
 variable is set to 1
 
 
-@section sec_lb2    FSM for each task
-    
-    
-Below we have imagees of the finite state machine (FSM) we plan to use for some of our tasks.
-Many of these have just two states, "On" and "Off" but the transitions unique to each task
-is shown below. 
 
-
-
-\image html FSMTermProject.png "FSMs for tasks" width=900px     
 
 
 @author              Nolan Clapp
