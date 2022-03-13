@@ -25,15 +25,15 @@ each of our files, we are only using FSMs at the task level. We have one for tas
 MotorControl Task and task3 ServoMotor Task. These diagrams are shown in 
 ThetaMotorControl.py and RMotorControl.py and ServoMotorF.py sections respectively. 
 
-The files that we are using are:
-main.py- Main file that runs all of our tasks and instantiates all objects
-EncoderDriver.py- Read the position of the Theta Motor
-Encoder.py- Read the position of the R Motor
-MotorDriver.py- Control the motor by supplying a duty
-ThetaMotorControl.py- Closed loop control of Theta Motor
-RMotorControl.py- Closed loop control of R Motor   
-ServoMotorF.py- Control the servo motor responsible for our half axis as well as limit switch reading
-GcodeInterpreter.py- Writed R and Theta Setpoints to .txt file to be read later
+The files that we are using: \n
+main.py- Main file that runs all of our tasks and instantiates all objects \n
+EncoderDriver.py- Read the position of the Theta Motor \n
+Encoder.py- Read the position of the R Motor \n
+MotorDriver.py- Control the motor by supplying a duty \n
+ThetaMotorControl.py- Closed loop control of Theta Motor \n
+RMotorControl.py- Closed loop control of R Motor    \n
+ServoMotorF.py- Control the servo motor responsible for our half axis as well as limit switch reading  \n
+GcodeInterpreter.py- Writed R and Theta Setpoints to .txt file to be read later \n
    
 
 The Task Diagram showing how these files are used is shown below. 

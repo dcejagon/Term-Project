@@ -4,7 +4,16 @@ This is our project main page for the ME 405 plotter project, and the progress w
 Our Source Code Repository can be found\+: \hypertarget{index_sec_lb1}{}\doxysection{Task Diagram and File Structure}\label{index_sec_lb1}
 We developed the Task Diagram seen below to demonstrate the file structure that we plan to use in our 2.\+5D plotter. Each of the files will have some combination of shares and/or queues in order to allow for variable data to be shared between files. The exact shares between files is shown in the diagram. We will utilize this by using the Task\+\_\+\+Shares.\+py file that we have been provided to ensure the shared variables are set up correctly, and contain usable data. In addition, we plan to have the differnet tasks communicate with eachother using the structure outlined in previous labs and by using Co\+Tasks.\+py to make sure we are taking advantage of cooperative multitasking. To simplify what is going on in each of our files, we are only using FSMs at the task level. We have one for task2 Motor\+Control Task and task3 Servo\+Motor Task. These diagrams are shown in Theta\+Motor\+Control.\+py and RMotor\+Control.\+py and Servo\+Motor\+F.\+py sections respectively.
 
-The files that we are using are\+: main Main file that runs all of our tasks and instantiates all objects Encoder\+Driver Read the position of the Theta Motor Encoder Read the position of the R Motor Motor\+Driver Control the motor by supplying a duty Theta\+Motor\+Control Closed loop control of Theta Motor RMotor\+Control Closed loop control of R Motor Servo\+MotorF Control the servo motor responsible for our half axis as well as limit switch reading Gcode\+Interpreter Writed R and Theta Setpoints to .txt file to be read later
+The files that we are using\+: ~\newline
+ main Main file that runs all of our tasks and instantiates all objects ~\newline
+ Encoder\+Driver Read the position of the Theta Motor ~\newline
+ Encoder Read the position of the R Motor ~\newline
+ Motor\+Driver Control the motor by supplying a duty ~\newline
+ Theta\+Motor\+Control Closed loop control of Theta Motor ~\newline
+ RMotor\+Control Closed loop control of R Motor ~\newline
+ Servo\+MotorF Control the servo motor responsible for our half axis as well as limit switch reading ~\newline
+ Gcode\+Interpreter Writed R and Theta Setpoints to .txt file to be read later ~\newline
+
 
 The Task Diagram showing how these files are used is shown below.
 
