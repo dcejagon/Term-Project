@@ -17,10 +17,14 @@ class EncoderDriver:
     def __init__(self,ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition1,EncPosition2):
         ''' @brief Constructs an encoder object
             @details Sets up the encoder so it is ready to run using the pins specified in some main file
-            @param ENCpin1 This parameter allows us to choose which first pin our encoder will be using 
-            @param ENCpin2 This parameter allows us to choose which first pin our encoder will be using
-            @param timernumber This parameter chooses the correct timer number for each instance of the encoder
-            
+            @param ENCpin1 This parameter allows us to choose which first pin our encoder1 will be using 
+            @param ENCpin2 This parameter allows us to choose which first pin our encoder1 will be using
+            @param timernumber This parameter chooses the correct timer number for encoder1
+            @param ENC2pin1 This parameter allows us to choose which first pin our encoder2 will be using 
+            @param ENC2pin2 This parameter allows us to choose which first pin our encoder2 will be using
+            @param timernumber2 This parameter chooses the correct timer number for encoder2
+            @param EncPosition1 Shared variable for encoder1 position that allows us to write to this variable 
+            @param EncPosition2 Shared variable for encoder2 position that allows us to write to this variable 
         '''
         ## @brief           Defines the first pin of the encoder
         #  @details         For example Encoder1 uses PinB6 as pin1
