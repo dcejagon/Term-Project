@@ -16,7 +16,6 @@ import MotorDriver
 import ThetaMotorControl
 import RMotorControl
 import ServoMotorF
-import pyb
 import time
 
 # MOTOR PIN STUFF
