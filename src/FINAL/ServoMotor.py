@@ -1,6 +1,7 @@
 """
     @file                    ServoMotor.py
-    @brief                   This file provides the code to interface directly with the encoder hardware
+    @brief                   This file for interacting with a servo motor
+    @details                 This driver file interacts with motors 
     @author                  Daniel Gonzalez
     @author                  Nolan Clapp
     @author                  Caleb Kephart
