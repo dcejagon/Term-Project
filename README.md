@@ -169,7 +169,7 @@ can be found in the links below.
 
 Full Source Code:          [https://github.com/dcejagon/Term-Project/blob/e9a6a358911b557f958eb8ccfb334c0a805cc6d8/src]
 
-Documentation:             [https://dcejagon.github.io/Term-Project/]
+Documentation:             [https://dcejagon.github.io/Term-Project/index.html]
 
 ### System Performance and Results
 We tested our system by trying to draw several images. We attempted to draw a 
