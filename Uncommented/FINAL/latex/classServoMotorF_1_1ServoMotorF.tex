@@ -1,0 +1,107 @@
+\hypertarget{classServoMotorF_1_1ServoMotorF}{}\doxysection{Servo\+Motor\+F.\+Servo\+MotorF Class Reference}
+\label{classServoMotorF_1_1ServoMotorF}\index{ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}}
+
+
+This class implements a driver to control a servo motor.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classServoMotorF_1_1ServoMotorF_a5cc16e47b7e3950e8042e1657b157f71}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, pin, \mbox{\hyperlink{classServoMotorF_1_1ServoMotorF_a2e3cb049b80d2d1e7a648a3986662118}{timern}}, \mbox{\hyperlink{classServoMotorF_1_1ServoMotorF_aa056cefdc5f490514603555f8a6aea3a}{ch}})
+\begin{DoxyCompactList}\small\item\em Creates a servo driver by initializing pins. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classServoMotorF_1_1ServoMotorF_ad4e9fca9c779da5996a767fe2da9957f}{up}} (self)
+\begin{DoxyCompactList}\small\item\em This function allows us to send a PWM signal to move servo up. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classServoMotorF_1_1ServoMotorF_a8a4424c2d4d96b2183dc4fcbd1491880}{down}} (self)
+\begin{DoxyCompactList}\small\item\em This function allows us to send a PWM signal to move servo down. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classServoMotorF_1_1ServoMotorF_a7cb4bb6317a1613f4239f3a2fb364969}{pin\+A7}}
+\begin{DoxyCompactList}\small\item\em Variable for the pin our servo motor is connected to. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_a2e3cb049b80d2d1e7a648a3986662118}\label{classServoMotorF_1_1ServoMotorF_a2e3cb049b80d2d1e7a648a3986662118}} 
+{\bfseries timern}
+\begin{DoxyCompactList}\small\item\em Variable for the timer for our servo motor pin (timer 17) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_aa056cefdc5f490514603555f8a6aea3a}\label{classServoMotorF_1_1ServoMotorF_aa056cefdc5f490514603555f8a6aea3a}} 
+{\bfseries ch}
+\begin{DoxyCompactList}\small\item\em Variable for the timer for our servo motor cahnnel (ch 1) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_a67c62e8eed4752304125f397256809c6}\label{classServoMotorF_1_1ServoMotorF_a67c62e8eed4752304125f397256809c6}} 
+{\bfseries tim17}
+\begin{DoxyCompactList}\small\item\em Variable for the timer for our servo motor pin (timer 17) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_af612c47f2caf13b014022183095256ae}\label{classServoMotorF_1_1ServoMotorF_af612c47f2caf13b014022183095256ae}} 
+{\bfseries ch1}
+\begin{DoxyCompactList}\small\item\em Instantiates ch1 for timer 17 for pwm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class implements a driver to control a servo motor. 
+
+Class is composed of two functions to control the servo\textquotesingle{}s positioning 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_a5cc16e47b7e3950e8042e1657b157f71}\label{classServoMotorF_1_1ServoMotorF_a5cc16e47b7e3950e8042e1657b157f71}} 
+\index{ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Servo\+Motor\+F.\+Servo\+Motor\+F.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pin,  }\item[{}]{timern,  }\item[{}]{ch }\end{DoxyParamCaption})}
+
+
+
+Creates a servo driver by initializing pins. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & Pin A7 that the servo motor connects to on the Nucleo \\
+\hline
+{\em timern} & Timer number associated with the servo motor \\
+\hline
+{\em Channel} & number associated with the timer of servo motor \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_a8a4424c2d4d96b2183dc4fcbd1491880}\label{classServoMotorF_1_1ServoMotorF_a8a4424c2d4d96b2183dc4fcbd1491880}} 
+\index{ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}!down@{down}}
+\index{down@{down}!ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}}
+\doxysubsubsection{\texorpdfstring{down()}{down()}}
+{\footnotesize\ttfamily def Servo\+Motor\+F.\+Servo\+Motor\+F.\+down (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+This function allows us to send a PWM signal to move servo down. 
+
+This method sends a PWM signal to the servo motor which is interpreted as a position, as the PWM \% decreases the pen moves down. \begin{DoxyReturn}{Returns}
+Returns value, 2, associated with down position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_ad4e9fca9c779da5996a767fe2da9957f}\label{classServoMotorF_1_1ServoMotorF_ad4e9fca9c779da5996a767fe2da9957f}} 
+\index{ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}!up@{up}}
+\index{up@{up}!ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}}
+\doxysubsubsection{\texorpdfstring{up()}{up()}}
+{\footnotesize\ttfamily def Servo\+Motor\+F.\+Servo\+Motor\+F.\+up (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+This function allows us to send a PWM signal to move servo up. 
+
+This method sends a PWM signal to the servo motor which is interpreted as a position, as the PWM \% increases the pen moves up. \begin{DoxyReturn}{Returns}
+Returns value, 1, associated with up position. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classServoMotorF_1_1ServoMotorF_a7cb4bb6317a1613f4239f3a2fb364969}\label{classServoMotorF_1_1ServoMotorF_a7cb4bb6317a1613f4239f3a2fb364969}} 
+\index{ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}!pinA7@{pinA7}}
+\index{pinA7@{pinA7}!ServoMotorF.ServoMotorF@{ServoMotorF.ServoMotorF}}
+\doxysubsubsection{\texorpdfstring{pinA7}{pinA7}}
+{\footnotesize\ttfamily Servo\+Motor\+F.\+Servo\+Motor\+F.\+pin\+A7}
+
+
+
+Variable for the pin our servo motor is connected to. 
+
+This variable sets up our servo motor pin as pin A7 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{ServoMotorF_8py}{Servo\+Motor\+F.\+py}}\end{DoxyCompactItemize}
