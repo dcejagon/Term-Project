@@ -14,7 +14,7 @@ class GcodeInterpreter:
     
     #def __init__(self,ThetaArray,RArray,setpoint1,setpoint2):
     def __init__(self):
-        '''! initializes class and arrays for data collection for generated text documents
+        ''' @brief initializes class and arrays for data collection for generated text documents
         '''
         # self.ThetaArray = ThetaArray
         # self.RArray = RArray
@@ -33,7 +33,7 @@ class GcodeInterpreter:
       
         
     def read (self,fileName):
-        '''! opens the text file and reads all data contained
+        '''  @brief opens the text file and reads all data contained
              goes line by line, searching for lines with relevant x and y coord data. extracts data and stores it in list.
              
              @param fileName: file name of input gcode
@@ -53,7 +53,7 @@ class GcodeInterpreter:
             return self.mylines
   
     def XExtract (self):
-        '''! Extracts the X values from list of data and floats elements.
+        ''' @brief Extracts the X values from list of data and floats elements.
             @return x: Extracted x coordinates from gcode
         '''
         self.x = []
@@ -69,7 +69,7 @@ class GcodeInterpreter:
        
         
     def YExtract (self):
-        '''! Extracts the Y values from list of data and floats elements.
+        ''' @brief Extracts the Y values from list of data and floats elements.
             @return y: Extracted y coordinates from gcode
         '''
         self.y = []
@@ -82,8 +82,8 @@ class GcodeInterpreter:
         return self.y
     
     def ZConvert (self):
-        '''! Extracts Z values and converts into values for servo to read to engage/disengage.
-            @return z: Extracted z plunging positions from gcode.
+        ''' @brief Extracts Z values and converts into values for servo to read to engage/disengage.
+            return z: Extracted z plunging positions from gcode.
         '''
         self.z = []
         for line in self.mylines:
@@ -95,7 +95,7 @@ class GcodeInterpreter:
    
     
     def ThetaConvert (self):
-        '''! Intakes extracted x and y values and converts them into corresponding angles for the encoder to read for theta position
+        ''' @brief Intakes extracted x and y values and converts them into corresponding angles for the encoder to read for theta position
         '''
         for i in range(0, len(self.x)):
             self.Theta.append((math.atan(self.y[i]/self.x[i])*180/math.pi))
@@ -106,7 +106,7 @@ class GcodeInterpreter:
             
         return self.Theta, self.Thetaradi
     def RConvert (self):
-        '''! Intakes extracted x and y values and converts them into corresponding angles for the encoder to read for R position
+        '''  @brief Intakes extracted x and y values and converts them into corresponding angles for the encoder to read for R position
         '''
         for i in range(0, len(self.x)):
             R_len=math.sqrt(self.x[i]**2+self.y[i]**2)
@@ -130,7 +130,7 @@ class GcodeInterpreter:
         
     
     def plot (self):
-          ''' generates the desired plot to verify gcode.
+          ''' @brief generates the desired plot to verify gcode.
           '''
          
           plt.plot(self.x,self.y, color='purple', linestyle='dashed')
@@ -141,63 +141,14 @@ class GcodeInterpreter:
           plt.show()
           
     def plotpol (self):
-        '''! Generates plot of interpreted gcode using polar coordinates.
+        ''' @brief Generates plot of interpreted gcode using polar coordinates.
         '''
         plt.polar(self.Thetaradi,self.R)
         plt.show
           
-    # def AIO (self,fileName):
-        
-    #     self.mylines = []
-    #     with open(fileName) as f:
-    #         for line in f:
-    #             if 'G1' in line:
-    #                 self.mylines.append(line)
-    #             else:
-    #                 pass
-                
-    #     self.x = []
-    #     self.Theta = []
-        
-    #     for line in self.mylines:
-    #         if 'X' in line:
-    #             val = (float(line[4:10])+100)
-    #             self.x.append(val)
-                
-    #         else:
-    #             pass
-            
-    #     self.y = []
-    #     for line in self.mylines:
-    #         if 'Y' in line:
-    #             val = float(line[12:19])
-    #             self.y.append(val)
-    #         else:
-    #             pass
-            
-    #     self.z = []
-    #     for line in self.mylines:
-    #         if 'Z0' in line:
-    #             self.z.append(0)
-    #         elif 'Z-' in line:
-    #             self.z.append(1)
-                
-    #     for i in range(0, len(self.x)):
-    #         self.Theta.append((math.atan(self.x[i]/self.y[i]))*(180/math.pi))#*16384/360)
-            
-    #     for i in range(0, len(self.x)):
-    #         R_len=math.sqrt(self.x[i]**2+self.y[i]**2)
-    #         lintotick=360/1.51
-    #         self.R.append(R_len*lintotick)
-            
-    #     # self.ThetaArray.put(self.Theta)
-    #     # self.RArray.put(self.R)
-            
-    #     # return self.ThetaArray , self.RArray
-    #     return(self.R,self.Theta)
-        
+       
     def TxtCreate (self):
-        '''! Creates two text files on board the pybflash to be used to pull positional data from to control the motors. 
+        '''  @brief Creates two text files on board the pybflash to be used to pull positional data from to control the motors. 
              One file for R values (along the arm), and another for theta values (angle of the arm).
         '''
         with open("Rcode.txt", "w") as f:
