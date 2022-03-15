@@ -122,8 +122,6 @@ Tswitch = task_share.Share ('h', thread_protect = False, name = "T_Switch")
 
 
 
-Theta= task_share.Share ('f', thread_protect = False, name = "Theta")
-R= task_share.Share ('f', thread_protect = False, name = "R")
 
 setpoint1.put(0)     #Theta Setpoint (Degrees)
 setpoint2.put(0)    #R setpoint (degrees) #Limit of 715
