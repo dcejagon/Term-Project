@@ -1,6 +1,6 @@
 """
-    @file                    EncoderDriver.py
-    @brief                   This file provides the code to interface directly with the encoder hardware
+    @file                    REncoder.py
+    @brief                   This file provides the code to interface directly with the encoder2 hardware
     @author                  Daniel Gonzalez
     @author                  Nolan Clapp
     @author                  Caleb Kephart

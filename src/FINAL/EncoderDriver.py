@@ -169,7 +169,8 @@ class EncoderDriver:
     def zero (self):
         ''' @brief Sets both encoder positions to zero
             @details sets the current encoder position to a zero value
-            @return position The new position of the encoder shaft (0)
+            @return EncPosition1 The new position of the encoder1 shaft (0)
+            @return EncPosition2 The new position of the encoder2 shaft (0)
         '''
         self.EncPosition1.put(0)
         self.EncPosition2.put(0)
