@@ -1,6 +1,6 @@
 """
-    @file                    ServoMotor.py
-    @brief                   This file for interacting with a servo motor and a kill switch
+    @file                    ServoMotorF.py
+    @brief                   This file for interacting with a servo motor and a limit switch
     @details                 This driver file interacts with servo motor by sending a PWM signal through a set pin.
                              The positioning of the servo motor is controlled by the PWM signal. 
     @author                  Daniel Gonzalez
