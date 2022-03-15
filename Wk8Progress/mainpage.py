@@ -9,7 +9,7 @@
                         This is our project main page for the ME 405 plotter project, and the progress
                         we have made up to this point on the software side of the project. 
                         
-                        Our Source Code Repository can be found:  \htmlonly <a href="https://github.com/dcejagon/Term-Project/blob/1a0c4c5a121f76a45e5bb83b75801c1a3a7dc53a/src">HERE</a> \endhtmlonly
+                        Our Source Code Repository can be found:  \htmlonly <a href="https://github.com/dcejagon/Term-Project/tree/main/src">HERE</a> \endhtmlonly
 
 @section sec_lb1     Task Diagram and File Structure 
    
