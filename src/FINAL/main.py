@@ -106,18 +106,48 @@ Kp1 = task_share.Share ('f', thread_protect = False, name = "Proportional_Gain1"
 #           to properly tune our system. This variable is shared between files but is 
 #           set in the main file. 
 Kp2 = task_share.Share ('f', thread_protect = False, name = "Proportional_Gain2")
+## @brief Shared variable for the setpoint of motor 1
+#  @details This variable is set up as a float so that when we calculate the setpoint
+#           from our Gcode, if it has a decimal result, the shared variable 
+#           structure will allow for that value to be written to it. This variable 
+#           is written in task1 and is read in our closed loop controller. 
 setpoint1 = task_share.Share ('f', thread_protect = False, name = "Set_Point1")
+## @brief Shared variable for the setpoint of motor 2
+#  @details This variable is set up as a float so that when we calculate the setpoint
+#           from our Gcode, if it has a decimal result, the shared variable 
+#           structure will allow for that value to be written to it. This variable 
+#           is written in task1 and is read in our closed loop controller. 
 setpoint2 = task_share.Share ('f', thread_protect = False, name = "Set_Point2")
 
-xpos = task_share.Share ('h', thread_protect = False, name = "X_Position")
-ypos = task_share.Share ('h', thread_protect = False, name = "Y_Position")
+## @brief Shared variable for the z position for our half axis. 
+#  @details This variable is either 0 or 1 depending on if we want our servo motor
+#           to be down or up. This allows us to raise and lower our Sharpie for 
+#           tracing the correct contours. 
 zpos = task_share.Share ('h', thread_protect = False, name = "z_Position")
-
+## @brief Shared variable to tell us when theta is ready to move
+#  @details This variable is calculated in the closed loop controller
+#           and tells us when theta position is within range of the setpoint.
+#           This variable is important for our FSM. When it is set to 1, 
+#           we calculate a new setpoint. When it is 0, we do not generate a new 
+#           setpoint. This allows the motor to reach its setpoint before a new one 
+#           is generated. 
 THETAGO=task_share.Share ('h', thread_protect = False, name = "THETAGO")
+## @brief Shared variable to tell us when R is ready to move
+#  @details This variable is calculated in the closed loop controller
+#           and tells us when R position is within range of the setpoint.
+#           This variable is important for our FSM. When it is set to 1, 
+#           we calculate a new setpoint. When it is 0, we do not generate a new 
+#           setpoint. This allows the motor to reach its setpoint before a new one 
+#           is generated
 RGO= task_share.Share ('h', thread_protect = False, name = "RGO")
-
+## @brief Shared variable for the value of our R limit switch
+#  @details This variable contains the value of the pin that our limit switch is 
+#           connected to. We are using this limit switch as a kill switch so that
+#           when the pin value changes from 1 to 0, the duty to all our motors is 
+#           set to 0. This prevents our motors from burning up when the parts reach 
+#           a mechanical stop. 
 Rswitch = task_share.Share ('h', thread_protect = False, name = "R_Switch")
-Tswitch = task_share.Share ('h', thread_protect = False, name = "T_Switch")
+
 
 
 
@@ -131,26 +161,41 @@ setpoint2.put(0)    #R setpoint (degrees) #Limit of 715
 Kp1.put(20)
 #Kp2.put(7)      #R Motor
 Kp2.put(10)
-##OBJECTS
+#OBJECTS
+
+## @brief Variable for the Motor 1 object
 motor1=MotorDriver.MotorDriver(en_pin, en_pin2, in1pin, in2pin, in1pin2, in2pin2, timer, timer2,duty1,duty2)
-
+## @brief Variable for the Motor 2 object
 motor2=MotorDriver.MotorDriver(en_pin, en_pin2, in1pin, in2pin, in1pin2, in2pin2, timer, timer2,duty1,duty2)
-
+## @brief Variable for the Encoder 1 object
 ENC1=EncoderDriver.EncoderDriver(ENCpin1,ENCpin2,ENC2pin1,ENC2pin2,timernumber,timernumber2,EncPosition,EncPosition2)
-
+## @brief Variable for the Encoder 2 object
 ENC2=REncoder.EncoderDriver(ENC2pin1,ENC2pin2,timernumber2,EncPosition2)
 
+## @brief Variable for the Theta Control Loop object
 ThetaControl=ThetaMotorControl.ThetaClosedLoop(Kp1,setpoint1,EncPosition,duty1,THETAGO)
+## @brief Variable for the R Control Loop object
 RControl=RMotorControl.RClosedLoop(Kp2,setpoint2,EncPosition2,duty2,RGO)
 
+## @brief Variable for the pin our servo motor is connected to
+#  @details This variable sets up our servo motor pin as pin A7
 servopin = pyb.Pin (pyb.Pin.board.PA7, pyb.Pin.OUT_PP)
+## @brief Variable for the timer for our servo motor pin (timer 17)
 servotimer =17
+## @brief Variable for the timer for our servo motor cahnnel (ch 1)
 servoch = 1
 
+## @brief Variable for the pin our first limit switch is connected to
+#  @details This variable sets up our servo motor pin as pin A8 and uses a 
+#           pull down resistor to ensure correct output.
 switchpin1=pyb.Pin(pyb.Pin.board.PA8, pyb.Pin.IN, pyb.Pin.PULL_DOWN) #PB4
+## @brief Variable for the pin our second limit switch is connected to
+#  @details This variable sets up our servo motor pin as pin A6 and uses a 
+#           pull down resistor to ensure correct output.
 switchpin2=pyb.Pin(pyb.Pin.board.PA6, pyb.Pin.IN, pyb.Pin.PULL_DOWN)
-
+## @brief Variable for the servo motor object
 Servo=ServoMotorF.ServoMotorF(servopin, servotimer, servoch)
+## @brief Variable for the limit switch object
 LSwitch=ServoMotorF.LimitSwitch(switchpin1,switchpin2,duty2,Rswitch)
 
 zpos.put(0)
