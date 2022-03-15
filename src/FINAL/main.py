@@ -148,21 +148,14 @@ RGO= task_share.Share ('h', thread_protect = False, name = "RGO")
 #           a mechanical stop. 
 Rswitch = task_share.Share ('h', thread_protect = False, name = "R_Switch")
 
-
-
-
-
-
 setpoint1.put(0)     #Theta Setpoint (Degrees)
 setpoint2.put(0)    #R setpoint (degrees) #Limit of 715
-
-
 #Kp1.put(27)     #Theta Motor
 Kp1.put(20)
 #Kp2.put(7)      #R Motor
 Kp2.put(10)
-#OBJECTS
 
+#OBJECTS
 ## @brief Variable for the Motor 1 object
 motor1=MotorDriver.MotorDriver(en_pin, en_pin2, in1pin, in2pin, in1pin2, in2pin2, timer, timer2,duty1,duty2)
 ## @brief Variable for the Motor 2 object
