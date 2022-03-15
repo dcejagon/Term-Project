@@ -1,6 +1,6 @@
 """
-    @file                    EncoderDriver.py
-    @brief                   This file provides the code to interface directly with the encoder hardware
+    @file                    REncoder.py
+    @brief                   This file provides the code to interface directly with the encoder2 hardware
     @author                  Daniel Gonzalez
     @author                  Nolan Clapp
     @author                  Caleb Kephart
@@ -9,18 +9,18 @@
 
 import pyb
     
-class Encoder:
+class EncoderDriver:
     ''' @brief Interface with quadrature encoders
         @details This code allows us to calculate the current position in ticks of the motor shaft
     '''
         
-    def __init__(self,ENCpin1,ENCpin2,timernumber):
+    def __init__(self,ENCpin1,ENCpin2,timernumber,EncPosition2):
         ''' @brief Constructs an encoder object
             @details Sets up the encoder so it is ready to run using the pins specified in some main file
             @param ENCpin1 This parameter allows us to choose which first pin our encoder will be using 
             @param ENCpin2 This parameter allows us to choose which first pin our encoder will be using
             @param timernumber This parameter chooses the correct timer number for each instance of the encoder
-            
+            @param EncPosition2 Variable that is passed in that allows us to write the encoder2 position to be read in other files
         '''
         ## @brief           Defines the first pin of the encoder
         #  @details         For example Encoder1 uses PinB6 as pin1
@@ -41,7 +41,7 @@ class Encoder:
         self.countprev=0
         ## @brief           Defines the curent encoder position
         #  @details         This variable keeps track of the current encoder position
-        self.position1 = 0       
+        self.ENCposition = 0       
         ## @brief           Sets up the on board timer on the Nucleo
         #  @details         This variable allows us to use Timer4 on the Nucleo with a period
         #                   of the largest 16 bit number with a prescaler of 0
@@ -56,64 +56,63 @@ class Encoder:
         #                    as channel 2
         self.ENCch2= self.tim4.channel(2, pyb.Timer.ENC_AB, pin=self.ENCpin2)
         
+        self.EncPosition2=EncPosition2
         print ('Creating a encoder driver')
         
     def read(self):
-        ''' @brief Reads encoder position by calculating delta
+        ''' @brief Reads encoder 2 position 
             @details This function is responsible for reading the encoder position
             and delta values, at a constant interval defined in the main program file.
-            @return position The new position of the encoder shaft
-        '''
+            Instead of simply reading timer.counter(), we must  calculate the delta of 
+            function so that our encoder does not overflow when it reaches the period (65535 ticks)
+            This function does not 'return' anything, but it writes to our shared variable for 
+            encoder position. 
+        '''   
         
         ## @brief           Creates a variable that keeps track of the count
         #  @details         This variable uses the onboard coutner to determine
         #                   encoder position
-        count=self.tim4.counter()
-        
+        count=self.tim4.counter()     
+        #print(count)
         ## @brief           Creates a variable that keeps track of the encoder delta
         #  @details         This variable is used to prevent counter overflow on our encoder
-        delta=count-self.countprev1
-        #print(delta)
- 
+        delta=count-self.countprev
+        #print(delta) 
         #check delta and fix
         if delta>= self.period/2:
             delta-=self.period
             #print(delta)
         elif delta< (-self.period/2):
-        #add delta to position variable to 
-            
+        #add delta to position variable to    
             delta+=self.period
         #make previous count = current count
+        #else:
+           # self.ENCposition=count
+        self.ENCposition+=delta
         
-        self.position1+=delta
-        self.EncPosition1.put(self.position1)
-        
-        self.countprev1=count
-        
-        #print(self.EncPosition1.get())
+        self.EncPosition2.put(self.ENCposition)
+        self.countprev=count
         #print(self.ENCposition*360/(4096*4))
-        return self.EncPosition1.get()
-    
-
         
-
-        
-       
     def zero (self):
-        ''' @brief Sets encoder position to zero
+        ''' @brief Sets both encoder positions to zero
             @details sets the current encoder position to a zero value
-            @return position The new position of the encoder shaft (0)
+            @return EncPosition2 The new position of the encoder2 shaft (0)
         '''
-        self.ENCposition=0
-        print('Zeroing Encoder')
-        return self.ENCposition
+        
+        self.EncPosition2.put(0)
+        #print('Zeroing Encoder')
+        #print(self.EncPosition.read())
+        
+        return self.EncPosition2.get()
+
 
 
 if __name__=="__main__":
     import time
-    ENCpin1=pyb.Pin (pyb.Pin.board.PB6)
-    ENCpin2=pyb.Pin (pyb.Pin.board.PB7)
-    timernumber=4
+    ENCpin1=pyb.Pin (pyb.Pin.board.PC6)
+    ENCpin2=pyb.Pin (pyb.Pin.board.PC7)
+    timernumber=8
     ENC1=EncoderDriver(ENCpin1,ENCpin2,timernumber)
     while True:
         try:

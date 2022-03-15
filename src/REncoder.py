@@ -20,7 +20,7 @@ class EncoderDriver:
             @param ENCpin1 This parameter allows us to choose which first pin our encoder will be using 
             @param ENCpin2 This parameter allows us to choose which first pin our encoder will be using
             @param timernumber This parameter chooses the correct timer number for each instance of the encoder
-            
+            @param EncPosition2 Variable that is passed in that allows us to write the encoder2 position to be read in other files
         '''
         ## @brief           Defines the first pin of the encoder
         #  @details         For example Encoder1 uses PinB6 as pin1
@@ -60,10 +60,13 @@ class EncoderDriver:
         print ('Creating a encoder driver')
         
     def read(self):
-        ''' @brief Reads encoder position by calculating delta
+        ''' @brief Reads encoder 2 position 
             @details This function is responsible for reading the encoder position
             and delta values, at a constant interval defined in the main program file.
-            @return position The new position of the encoder shaft
+            Instead of simply reading timer.counter(), we must  calculate the delta of 
+            function so that our encoder does not overflow when it reaches the period (65535 ticks)
+            This function does not 'return' anything, but it writes to our shared variable for 
+            encoder position. 
         '''   
         
         ## @brief           Creates a variable that keeps track of the count
@@ -91,17 +94,18 @@ class EncoderDriver:
         self.countprev=count
         #print(self.ENCposition*360/(4096*4))
         
-        
-        
-       
     def zero (self):
-        ''' @brief Sets encoder position to zero
+        ''' @brief Sets both encoder positions to zero
             @details sets the current encoder position to a zero value
-            @return position The new position of the encoder shaft (0)
+            @return EncPosition2 The new position of the encoder2 shaft (0)
         '''
-        self.ENCposition=0
-        print('Zeroing Encoder')
-        return self.ENCposition
+        
+        self.EncPosition2.put(0)
+        #print('Zeroing Encoder')
+        #print(self.EncPosition.read())
+        
+        return self.EncPosition2.get()
+
 
 
 if __name__=="__main__":
