@@ -72,13 +72,40 @@ ENC2pin2=pyb.Pin (pyb.Pin.board.PC7)
 ## @brief This variable is for the timer number associated with encoder 2
 timernumber2=8
 
-## SHARES
+
+# SHARES
+## @brief Shared Variable for duty of motor 1
+#  @details This shared variable for the duty of motor 1 is set up to be 
+#           a float. This is important because when we write to this variable in 
+#           our closed loop controller, the number we calculate is a float. 
 duty1 = task_share.Share ('f', thread_protect = False, name = "Duty_1")
+## @brief Shared Variable for duty of motor 2
+#  @details This shared variable for the duty of motor 2 is set up to be 
+#           a float. This is important because when we write to this variable in 
+#           our closed loop controller, the number we calculate is a float. 
 duty2 = task_share.Share ('f', thread_protect = False, name = "Duty_2")
+## @brief Shared Variable position of encoder 1
+#  @details This shared variable for the position of motor 1 is set up to be 
+#           a 16-bit unsigned int. This is important because when we write to 
+#           this variable in our encoder driver, it is a 16 bit number (between
+#           0 and 65535)
 EncPosition = task_share.Share ('h', thread_protect = False, name = "Position_1")
+## @brief Shared Variable position of encoder 2
+#  @details This shared variable for the position of motor 2 is set up to be 
+#           a 16-bit unsigned int. This is important because when we write to 
+#           this variable in our encoder driver, it is a 16 bit number (between
+#           0 and 65535)
 EncPosition2 = task_share.Share ('h', thread_protect = False, name = "Position_2")
-Kp1 = task_share.Share ('f', thread_protect = False, name = "Porportional_Gain1")
-Kp2 = task_share.Share ('f', thread_protect = False, name = "Porportional_Gain2")
+## @brief Shared variable for proportional gain of motor 1
+#  @details This variable is set up as a float so that we can input decimal gains
+#           to properly tune our system. This variable is shared between files but is 
+#           set in the main file. 
+Kp1 = task_share.Share ('f', thread_protect = False, name = "Proportional_Gain1")
+## @brief Shared variable for proportional gain of motor 2
+#  @details This variable is set up as a float so that we can input decimal gains
+#           to properly tune our system. This variable is shared between files but is 
+#           set in the main file. 
+Kp2 = task_share.Share ('f', thread_protect = False, name = "Proportional_Gain2")
 setpoint1 = task_share.Share ('f', thread_protect = False, name = "Set_Point1")
 setpoint2 = task_share.Share ('f', thread_protect = False, name = "Set_Point2")
 
