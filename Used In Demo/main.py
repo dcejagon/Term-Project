@@ -11,17 +11,11 @@ import pyb
 import cotask
 import task_share
 import EncoderDriver
-import Encoder
 import REncoder
 import MotorDriver
-import SingleMotorDriver
-#import ClosedLoop
 import ThetaMotorControl
 import RMotorControl
 import ServoMotorF
-import LimitSwitch
-import GcodeInterpreter 
-import theta_r_values
 import pyb
 import time
 
