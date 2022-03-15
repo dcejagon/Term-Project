@@ -1,5 +1,6 @@
 """
     @file                    main.py
+    @brief                   File to control the main function of our hardware
     @author                  Daniel Gonzalez
     @author                  Nolan Clapp
     @author                  Caleb Kephart

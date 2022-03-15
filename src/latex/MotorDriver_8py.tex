@@ -1,0 +1,47 @@
+\hypertarget{MotorDriver_8py}{}\doxysection{Motor\+Driver.\+py File Reference}
+\label{MotorDriver_8py}\index{MotorDriver.py@{MotorDriver.py}}
+
+
+A driver file for interacting with motors.  
+
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMotorDriver_1_1MotorDriver}{Motor\+Driver.\+Motor\+Driver}}
+\begin{DoxyCompactList}\small\item\em This class implements a motor driver for an ME405 kit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{MotorDriver_8py_a17cb3058c58ebc54e6001d414730b2f2}\label{MotorDriver_8py_a17cb3058c58ebc54e6001d414730b2f2}} 
+{\bfseries Motor\+Driver.\+en\+\_\+pin} = pyb.\+Pin (pyb.\+Pin.\+board.\+PC0, pyb.\+Pin.\+OUT\+\_\+\+PP)
+\item 
+\mbox{\Hypertarget{MotorDriver_8py_a5a2c52f0fc0bad9284f9a9df8794282f}\label{MotorDriver_8py_a5a2c52f0fc0bad9284f9a9df8794282f}} 
+{\bfseries Motor\+Driver.\+in1pin} = pyb.\+Pin (pyb.\+Pin.\+board.\+PA0, pyb.\+Pin.\+OUT\+\_\+\+PP)
+\item 
+\mbox{\Hypertarget{MotorDriver_8py_a64ae348ab71ac272271b4a90caec19f7}\label{MotorDriver_8py_a64ae348ab71ac272271b4a90caec19f7}} 
+{\bfseries Motor\+Driver.\+in2pin} = pyb.\+Pin (pyb.\+Pin.\+board.\+PA1, pyb.\+Pin.\+OUT\+\_\+\+PP)
+\item 
+\mbox{\Hypertarget{MotorDriver_8py_a5666aeae7802c073d246a597a5ec74d8}\label{MotorDriver_8py_a5666aeae7802c073d246a597a5ec74d8}} 
+int {\bfseries Motor\+Driver.\+timer} = 3
+\item 
+\mbox{\Hypertarget{MotorDriver_8py_a7cc6c65363fe943d1d0e4379bac398d0}\label{MotorDriver_8py_a7cc6c65363fe943d1d0e4379bac398d0}} 
+{\bfseries Motor\+Driver.\+motor1} = Motor\+Driver(en\+\_\+pin, in1pin, in2pin, timer)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A driver file for interacting with motors. 
+
+This driver file interacts with motors by sending duty cycle values and setting pin values to control the motor behavior.
+
+\begin{DoxyAuthor}{Author}
+Daniel Gonzalez 
+
+Nolan Clapp 
+
+Caleb Kephart 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+January 24, 2022 
+\end{DoxyDate}
