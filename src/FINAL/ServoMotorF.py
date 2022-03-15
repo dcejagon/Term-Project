@@ -22,12 +22,16 @@ class ServoMotorF:
             @param   timern Timer number associated with the servo motor
             @param   Channel number associated with the timer of servo motor
         '''
+        ## @brief Variable for the pin our servo motor is connected to
+        #  @details This variable sets up our servo motor pin as pin A7
         self.pinA7 = pin
-        # self.tim2 = timer
-        self.ch = ch
+        ## @brief Variable for the timer for our servo motor pin (timer 17)       
         self.timern=timern
-        
+        ## @brief Variable for the timer for our servo motor cahnnel (ch 1)
+        self.ch = ch
+        ## @brief Variable for the timer for our servo motor pin (timer 17)       
         self.tim17 = pyb.Timer (17, freq=75)
+        ## @brief Instantiates ch1 for timer 17 for pwm
         self.ch1 = self.tim17.channel (1, pyb.Timer.PWM, pin=self.pinA7)
         
     def up(self):
@@ -64,9 +68,25 @@ class LimitSwitch:
             @param   duty2      This parameter chooses the duty cycle for the R motor
             @param   Rswitch    This parameter allows us store the limit switch pin value
         '''
+        ## @brief Variable for the pin our first limit switch is connected to
+        #  @details This variable sets up our servo motor pin as pin A8 and uses a 
+        #           pull down resistor to ensure correct output.
         self.switchpin1=switchpin1
+        ## @brief Variable for the pin our second limit switch is connected to
+        #  @details This variable sets up our servo motor pin as pin A6 and uses a 
+        #           pull down resistor to ensure correct output.
         self.switchpin2=switchpin2
+        ## @brief Shared Variable for duty of motor 2
+        #  @details This shared variable for the duty of motor 2 is set up to be 
+        #           a float. This is important because when we write to this variable in 
+        #           our closed loop controller, the number we calculate is a float. 
         self.duty2=duty2
+        ## @brief Shared variable for the value of our R limit switch
+        #  @details This variable contains the value of the pin that our limit switch is 
+        #           connected to. We are using this limit switch as a kill switch so that
+        #           when the pin value changes from 1 to 0, the duty to all our motors is 
+        #           set to 0. This prevents our motors from burning up when the parts reach 
+        #           a mechanical stop. 
         self.Rswitch=Rswitch
     print('initializing limit switch')
     def checkswitch(self):
