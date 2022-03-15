@@ -40,7 +40,7 @@ class GcodeInterpreter:
              @return mylines: array of relevant lines of gcode.
         '''
         ## @brief Extracts relevant lines from gcode to acquire x and y coordinates
-        #.
+        #
         self.mylines = []
         with open(fileName) as f:
             for line in f:
@@ -56,10 +56,14 @@ class GcodeInterpreter:
         '''! Extracts the X values from list of data and floats elements.
             @return x: Extracted x coordinates from gcode
         '''
+        ## @brief Extracted x coordinates from gcode
+        #
         self.x = []
         self.Theta = []
         for line in self.mylines:
             if 'X' in line:
+                ## @brief floats strings within mylines
+                #
                 val = float(line[4:10])
                 
                 self.x.append(val)
@@ -72,6 +76,8 @@ class GcodeInterpreter:
         '''! Extracts the Y values from list of data and floats elements.
             @return y: Extracted y coordinates from gcode
         '''
+        ## @brief Extracted y coordinates from gcode
+        #
         self.y = []
         for line in self.mylines:
             if 'Y' in line:
@@ -85,6 +91,8 @@ class GcodeInterpreter:
         '''! Extracts Z values and converts into values for servo to read to engage/disengage.
             @return z: Extracted z plunging positions from gcode.
         '''
+        ## @brief Extracted z coordinates from gcode
+        #
         self.z = []
         for line in self.mylines:
             if 'Z0' in line:
@@ -96,6 +104,8 @@ class GcodeInterpreter:
     
     def ThetaConvert (self):
         '''! Intakes extracted x and y values and converts them into corresponding angles for the encoder to read for theta position
+            @return Theta:  Array set up to collect data points for the arm angle position.
+            @return  Thetaradi:  Array set up to collect arm angle data converted to polar coordinates.
         '''
         for i in range(0, len(self.x)):
             self.Theta.append((math.atan(self.y[i]/self.x[i])*180/math.pi))
@@ -107,6 +117,7 @@ class GcodeInterpreter:
         return self.Theta, self.Thetaradi
     def RConvert (self):
         '''! Intakes extracted x and y values and converts them into corresponding angles for the encoder to read for R position
+            @return  R: Array set up to collect data points for the position along the arm.
         '''
         for i in range(0, len(self.x)):
             R_len=math.sqrt(self.x[i]**2+self.y[i]**2)
@@ -201,10 +212,14 @@ class GcodeInterpreter:
              One file for R values (along the arm), and another for theta values (angle of the arm).
         '''
         with open("Rcode.txt", "w") as f:
+            ## @brief Takes floats from the R array and converts to strings so that they can be written to txt file.
+            #
             R_str = str(self.R)
             f.write(R_str)
         
         with open("Tcode.txt", "w+") as g:
+             ## @brief Takes floats from the Theta array and converts to strings so that they can be written to txt file.
+            #
             Theta_str = str(self.Theta)
             g.write(Theta_str)
         
@@ -221,4 +236,4 @@ if __name__ == '__main__':
     # share_val = d.ShareGen()
     d.plot()
     d.plotpol()
-    #d.TxtCreate()
+    d.TxtCreate()
