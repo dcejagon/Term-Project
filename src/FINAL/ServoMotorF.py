@@ -95,9 +95,6 @@ class LimitSwitch:
             @details The function checks the value of the switchpin1
                      and if the value is 0 then it will set the duty for the R motor to zero.  
         '''
-        #print('CHECKING SWITCH')
-        #R=self.switch_pin1.value()
-        #T=self.switch_pin2.value()
         
         if self.switchpin1.value()==1:
             #print('val=1')
